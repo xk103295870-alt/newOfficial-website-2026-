@@ -1,0 +1,1 @@
+import{_ as i,o as a,c as t,ag as n}from"./chunks/framework.Vng7Hdlh.js";const o=JSON.parse('{"title":"API 文档","description":"","frontmatter":{},"headers":[],"relativePath":"api.md","filePath":"api.md"}'),h={name:"api.md"};function l(p,s,e,k,d,r){return a(),t("div",null,[...s[0]||(s[0]=[n("",13)])])}const g=i(h,[["render",l]]);export{o as __pageData,g as default};

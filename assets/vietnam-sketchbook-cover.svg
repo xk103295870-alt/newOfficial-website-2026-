@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000">
+  <defs>
+    <pattern id="grain" width="11" height="13" patternUnits="userSpaceOnUse"><circle cx="2" cy="5" r=".6" fill="#806c4e" opacity=".15"/><circle cx="8" cy="11" r=".5" fill="#fff" opacity=".6"/></pattern>
+    <linearGradient id="spine"><stop stop-color="#55472c" stop-opacity="0"/><stop offset=".5" stop-color="#55472c" stop-opacity=".17"/><stop offset="1" stop-color="#55472c" stop-opacity="0"/></linearGradient>
+  </defs>
+  <path fill="#e9e9e2" d="M0 0h1440v1000H0z"/>
+  <g transform="translate(173 187) rotate(-5 545 315)">
+    <path d="M-10 3Q257-27 545 2Q813-23 1100 4V644Q837 612 545 636Q285 613-10 642Z" fill="#aeafa2" opacity=".22" transform="translate(12 19)"/>
+    <path d="M-5 5Q270-20 545 8Q820-20 1096 6V632Q820 605 545 628Q270 607-5 632Z" fill="#b0a98f"/>
+    <path d="M0 0Q270-24 545 0Q817-24 1090 0V620Q816 598 545 623Q270 598 0 620Z" fill="#faf4e3"/>
+    <text x="54" y="62" font-family="Arial,sans-serif" font-size="12" letter-spacing="3" fill="#666b55">WNTC / TRAVEL NOTES</text>
+    <g font-family="Georgia,serif" fill="#30493e"><text x="52" y="167" font-size="82" font-style="italic">Việt Nam</text><text x="57" y="217" font-size="28">a little book of moments.</text></g>
+    <path d="M54 241Q193 251 361 238" fill="none" stroke="#ac593b" stroke-width="3"/>
+    <g transform="translate(88 277) rotate(-7 166 110)">
+      <path fill="#e2b65e" d="M0 0h338v199H0z"/>
+      <path fill="#aa6945" d="M-8 40L170-12 344 47 310 65 0 63Z"/>
+      <path fill="#f3d68b" d="M0 63h338v136H0z"/>
+      <path fill="#466d5c" d="M31 95h51v104H31zM115 87h53v112h-53zM207 90h85v67h-85z"/>
+      <path d="M33 110h47m-47 11h47m-47 11h47m-47 11h47m-47 11h47m35-44h49m-49 12h49m-49 12h49m-49 12h49" stroke="#92a083" stroke-width="2"/>
+      <path d="M-5 60Q182 90 342 46" stroke="#384b3b" stroke-width="2" fill="none"/>
+      <g fill="#c75f48"><ellipse cx="98" cy="83" rx="12" ry="17"/><ellipse cx="233" cy="80" rx="12" ry="17"/></g>
+      <path d="M98 65v36m135-37v34" stroke="#e8aa75" stroke-width="2"/>
+      <path d="M17 184Q-12 129 18 100M18 171Q48 141 29 130" stroke="#466446" stroke-width="7" fill="none"/>
+      <path d="M0 199h338" stroke="#ac7751" stroke-width="6"/>
+    </g>
+    <text x="57" y="564" font-family="Georgia,serif" font-style="italic" font-size="21" fill="#7a7058">Slow days. Small discoveries.</text>
+    <g>
+      <path d="M588 44Q803 33 1045 44L1044 530Q810 518 588 540Z" fill="#dbe7da"/>
+      <circle cx="931" cy="116" r="37" fill="#eed187"/>
+      <path fill="#8ca59a" d="M586 246L625 174 657 199 704 121 737 231 769 219 811 262V368H586Z"/>
+      <path fill="#547e70" d="M841 290L881 212 913 231 941 161 977 272 1019 231 1046 301V380H841Z"/>
+      <path d="M588 306Q714 288 835 310T1045 305V530Q814 518 588 540Z" fill="#6ba6a6"/>
+      <path d="M590 351Q712 326 844 347T1043 342M612 391Q728 378 810 391M874 384l150-7M592 464Q714 448 849 465T1044 462M654 508l137-8" fill="none" stroke="#bbd4bf" stroke-width="4" opacity=".75"/>
+      <path d="M796 281v147" fill="none" stroke="#544e3e" stroke-width="4"/>
+      <path d="M801 294L860 394 801 390Z" fill="#f4e5bc"/><path d="M789 314L750 394 789 390Z" fill="#d7b975"/>
+      <path d="M745 414Q794 424 871 408L851 435 766 438Z" fill="#965c3d"/>
+      <path d="M714 456Q801 443 884 451" fill="none" stroke="#537f7e" stroke-width="4"/>
+    </g>
+    <text x="591" y="579" font-family="Arial,sans-serif" letter-spacing="2" font-size="11" fill="#65745d">VIETNAM SKETCHBOOK — VISUAL STUDY</text>
+    <path d="M526-1Q547 300 526 621H566Q550 300 566-1Z" fill="url(#spine)"/>
+    <path d="M0 0h1090v620H0z" fill="url(#grain)"/>
+  </g>
+  <text x="55" y="61" font-family="Arial,sans-serif" font-size="13" letter-spacing="2" fill="#5b6559">WNTC / EXP. 002</text>
+  <text x="55" y="952" font-family="Arial,sans-serif" font-size="12" letter-spacing="2" fill="#5b6559">A JOURNEY, ONE PAGE AT A TIME.</text>
+  <path d="M1344 911h32v32m0-32-34 34" fill="none" stroke="#344a3d" stroke-width="2"/>
+</svg>

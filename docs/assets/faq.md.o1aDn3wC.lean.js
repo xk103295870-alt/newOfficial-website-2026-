@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as r,ag as o}from"./chunks/framework.Vng7Hdlh.js";const p=JSON.parse('{"title":"常见问题","description":"","frontmatter":{},"headers":[],"relativePath":"faq.md","filePath":"faq.md"}'),n={name:"faq.md"};function s(i,a,l,h,d,q){return t(),r("div",null,[...a[0]||(a[0]=[o("",11)])])}const _=e(n,[["render",s]]);export{p as __pageData,_ as default};

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>越南旅行手绘册 — WNTC AI创意实验</title>
+  <meta name="description" content="WNTC 越南旅行手绘册：跨页画面、原片对照与交互折页。由真实旅行照片转绘的 AI 插画，与原片一起翻阅。" />
+  <link rel="icon" href="assets/wntc-favicon-aligned.ico" sizes="any" />
+  <link rel="stylesheet" href="styles.css?v=work-card-hover-20260927" />
+  <link rel="stylesheet" href="product.css?v=6e90b3200a" />
+  <link rel="stylesheet" href="sketchbook.css?v=ba69abc870" />
+  <script src="main.js?v=8ab71c5517" defer></script>
+  <script type="module" src="vietnam-sketchbook.js?v=cfc48b6ca0"></script>
+</head>
+<body id="top" data-page="vietnam">
+<a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark" aria-label="WNTC — 首页" data-en-label="WNTC — Home"><img src="assets/wntc-logo-nav.png" alt="WNTC" width="36" height="24" /></a>
+    <nav class="nav-links" id="primary-nav" aria-label="手绘册导航" data-en-label="Sketchbook navigation">
+      <a href="ai-lab.html#experiments" data-en="AI CREATIVE LAB">AI创意实验</a>
+      <a href="index.html#work" data-en="ALL WORK">全部作品</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button id="lang-toggle" class="lang-toggle" type="button" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="选择语言" data-en-label="Choose language">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4.5" ry="9"/><path d="M12 3v18M3 12h18M4.2 7.5h15.6M4.2 16.5h15.6"/></svg>
+          <span id="lang-current">中文</span><svg class="chevron" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" aria-hidden="true"><path d="m3 4.5 3 3-3 3"/></svg>
+        </button>
+        <ul id="lang-menu" class="lang-menu" role="menu" aria-label="语言" data-en-label="Language" hidden>
+          <li role="none"><button type="button" class="lang-option" data-lang="zh" role="menuitemradio" aria-checked="true" lang="zh-CN" tabindex="-1">中文<span aria-hidden="true">✓</span></button></li>
+          <li role="none"><button type="button" class="lang-option" data-lang="en" role="menuitemradio" aria-checked="false" lang="en" tabindex="-1">English<span aria-hidden="true">✓</span></button></li>
+        </ul>
+      </div>
+      <a href="index.html#contact" class="nav-contact"><span data-en="LET’S TALK">联系</span><span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="展开导航" data-en-label="Toggle navigation" type="button"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="sketch-reader">
+  <div class="sketch-reader-heading">
+    <a class="sketch-back" href="ai-lab.html#experiments"><span aria-hidden="true">←</span><span data-en="Back to AI creative lab">返回AI创意实验</span></a>
+    <h1 id="sketch-title" data-en="Vietnam Travel Sketchbook">越南旅行手绘册</h1>
+    <span class="sketch-edition">WNTC / EXP. 001</span>
+  </div>
+  <section class="sketch-stage" aria-labelledby="sketch-title">
+    <div class="sketch-view">
+      <div class="sketch-book-wrap">
+        <canvas id="sketchbook" class="sketch-canvas" width="1400" height="920" tabindex="0" role="group" aria-label="旅行手绘册：拖动左右页角，或使用方向键翻页" data-en-label="Travel sketchbook: drag a page corner or use the arrow keys" aria-describedby="sketch-caption sketch-instruction sketch-status"><span data-en="Illustrated Vietnam travel scenes. Use the page buttons below.">越南旅行手绘插画，请使用下方按钮翻页。</span></canvas>
+        <p id="sketch-loading" class="sketch-loading" role="status" data-en="Opening your sketchbook…">正在翻开手绘册…</p>
+      </div>
+      <aside class="sketch-reference" hidden aria-label="对应的旅行原照片" data-en-label="Original travel photograph">
+        <button id="sketch-photo-open" class="sketch-photo-card" type="button" aria-label="放大查看旅行原照片" data-en-label="Enlarge the original photograph" aria-haspopup="dialog" aria-controls="sketch-photo-dialog">
+          <img src="assets/vietnam-sketchbook/river-01-thumb.jpg" alt="蓝调时分的越南河景，两岸建筑亮起灯火，灯笼船穿行水面" width="480" height="360" />
+          <span><span data-en="Original photo">旅行原片</span><span aria-hidden="true">↗</span></span>
+        </button>
+        <span class="sketch-photo-index">原片 / 01</span>
+      </aside>
+    </div>
+    <div class="sketch-bottom">
+      <span class="sketch-signature">WNTC · travel notes</span>
+      <div class="sketch-caption-group"><p id="sketch-caption" class="sketch-caption" aria-live="polite" aria-atomic="true">一段旅程，从这里翻开。</p><p id="sketch-status" class="sketch-status">独立 AI 手绘封皮 · 莲花与会安灯笼</p></div>
+      <div class="sketch-controls" aria-label="翻页" data-en-label="Page controls">
+        <button id="sketch-prev" type="button" aria-label="上一页" data-en-label="Previous page" disabled>←</button>
+        <span id="sketch-pagination" class="sketch-pagination">01 / 17</span>
+        <button id="sketch-next" type="button" aria-label="下一页" data-en-label="Next page" disabled>→</button>
+      </div>
+    </div>
+    <p id="sketch-instruction" class="sketch-instruction" data-en="Drag a corner to turn · Release to turn or settle back · Arrow keys also work">拖动页角翻书 · 松手翻过或回弹 · 也可以使用方向键</p>
+    <noscript><p class="sketch-fallback">此预览需要 JavaScript。<a href="assets/越南旅拍1.jpeg">查看旅行原片</a></p></noscript>
+  </section>
+</main>
+<footer class="sketch-footer"><span>© <span id="year">2026</span> WNTC</span><a href="ai-lab.html#experiments" data-en="More experiments ↗">更多AI创意实验 ↗</a></footer>
+<dialog id="sketch-photo-dialog" class="sketch-photo-dialog" aria-labelledby="photo-dialog-title">
+  <div class="sketch-photo-dialog-head"><h2 id="photo-dialog-title">旅行原片 / 01</h2><button id="sketch-photo-close" type="button" aria-label="关闭原片" data-en-label="Close original photo">×</button></div>
+  <img src="assets/vietnam-sketchbook/river-01-photo.jpg" alt="蓝调时分的越南河景，两岸建筑亮起灯火，灯笼船穿行水面" width="1800" height="1350" />
+  <a href="assets/越南旅拍1.jpeg" target="_blank" rel="noopener" data-en="View full-resolution original ↗">查看完整分辨率原片 ↗</a>
+</dialog>
+</body>
+</html>

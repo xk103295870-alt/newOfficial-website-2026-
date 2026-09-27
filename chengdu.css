@@ -1,0 +1,75 @@
+/* The editorial shell stays white; the station is the moving pixel postcard. */
+body[data-page=chengdu]{background:#fff;color:#202820}
+.town-page{max-width:1600px;margin:auto;padding:30px clamp(18px,4vw,64px) 0}
+.town-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding:0 0 42px}
+.town-back{font-size:11px;color:#788176;display:block;margin-bottom:38px}
+.town-eyebrow{font-size:10px;letter-spacing:.15em;color:#72806a;margin-bottom:19px}
+.town-heading h1{font-size:clamp(34px,4.6vw,66px);font-weight:400;line-height:1.23;letter-spacing:-.055em}
+.town-heading h1 em{font-style:normal;color:#8d9785}
+.town-intro{padding-bottom:7px;font-size:13px;line-height:1.9;color:#737b6d}
+.town-live{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.12em;margin-bottom:19px}
+.town-live i{height:6px;width:6px;background:#769343;border-radius:100%}
+.town-frame{border:1px solid #d9dece;border-radius:5px;overflow:hidden;background:#f5f6ef}
+.town-toolbar{min-height:57px;display:flex;align-items:center;justify-content:space-between;padding:10px 17px;gap:12px;background:#f5f6ef}
+.town-mode,.town-settings{display:flex;align-items:center;gap:5px}
+.town-toolbar button,.town-actions button{padding:9px 13px;font-size:11px;border-radius:3px;white-space:nowrap}
+.town-toolbar button[aria-pressed=true]{background:#354b38;color:#f0e8c9}
+.town-toolbar button:hover,.town-actions button:hover{background:#dfe5d3;color:#293e2d}
+.town-toolbar button:disabled{opacity:.35;cursor:wait}
+.town-coordinates{font-size:9px;letter-spacing:.13em;margin-right:15px;color:#7c866f}
+.town-viewport{position:relative;height:clamp(320px,50vw,560px);background:#1b2d3d;overflow:hidden}
+#town-game{width:100%;height:100%;touch-action:none;image-rendering:pixelated}
+#town-game canvas{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;outline-offset:-3px}
+#town-game canvas:focus-visible{outline:2px solid #f4de95}
+.town-message{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;background:#2c453bdc;color:#f4e6bf;font-size:14px;z-index:8}
+.town-message[hidden],.town-info[hidden]{display:none}
+.town-info{position:absolute;right:24px;top:24px;width:280px;max-width:calc(100% - 32px);padding:25px;background:#faf7e9;color:#364637;border:3px double #a6aa87;box-shadow:6px 6px 0 #273f384d;z-index:6}
+.town-info>button:first-child{position:absolute;right:10px;top:7px;font-size:22px;padding:0 5px;color:#748068}
+.town-info small{font-size:9px;letter-spacing:.14em;color:#90957b}
+.town-info h2{font-size:24px;font-weight:400;margin:15px 0;letter-spacing:-.04em}
+.town-info p{font-size:12px;line-height:1.8;color:#72775f;margin-bottom:20px}
+#town-visit{font-size:11px;border-bottom:1px solid #939879;padding-bottom:5px}
+.town-dpad{position:absolute;left:20px;bottom:22px;display:none;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(2,36px);gap:3px;opacity:.92}
+.town-dpad button{background:#f4edce;color:#354736;border:1px solid #6d7755;box-shadow:2px 2px 0 #354f3b73;font:18px monospace;touch-action:none;user-select:none;-webkit-user-select:none}
+.town-dpad button:first-child{grid-column:2}
+.town-dpad button:nth-child(2){grid-column:1;grid-row:2}.town-dpad button:nth-child(3){grid-column:2;grid-row:2}.town-dpad button:nth-child(4){grid-column:3;grid-row:2}
+.town-dpad button:active{background:#a4b779}
+.town-actions{position:absolute;right:20px;bottom:22px;display:flex;gap:6px}
+.town-actions button{background:#f1eccfdc;color:#344737;backdrop-filter:blur(6px)}
+.town-actions button:disabled{opacity:.5;cursor:default}
+.town-help{display:flex;justify-content:space-between;gap:15px;padding:15px 18px;font-size:10px;line-height:1.5;color:#7d866f}
+.town-help span:first-child{color:#405740}
+.town-story{display:grid;grid-template-columns:1fr 1fr;gap:18px 60px;padding:80px 0 85px}
+.town-story>.town-eyebrow{grid-column:1/-1;margin:0}
+.town-story h2{font-size:clamp(29px,3vw,44px);font-weight:400;line-height:1.4;letter-spacing:-.06em}
+.town-story>div{font-size:13px;line-height:1.9;color:#70796a;max-width:560px}
+.town-disclaimer{font-size:10px;margin-top:23px;color:#969d8f}
+.town-footer{padding:24px clamp(18px,4vw,64px);display:flex;justify-content:space-between;font-size:10px;color:#919a89}
+/* EXP.002: only the artwork and the bottom CTA link into the game. */
+.city-experiment{margin-top:96px}.city-cover-art{display:grid;place-items:center;padding:30px;background:#f5f5f1}.city-cover{position:relative;display:block;width:min(100%,640px);aspect-ratio:1.6;overflow:hidden;border-radius:3px;background:#698b41;color:#fff5d4;box-shadow:0 16px 35px #30291e18}
+.city-cover img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;transition:transform .65s}.city-cover:hover img,.city-cover:focus-visible img{transform:scale(1.025)}
+.city-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(#172e342b,transparent 50%,#172e348a);pointer-events:none}
+.city-cover-label{position:absolute;z-index:1;left:25px;top:25px;font-size:10px;letter-spacing:.14em}
+.city-cover-title{position:absolute;z-index:1;bottom:24px;left:25px;font-size:clamp(32px,4vw,54px);letter-spacing:-.04em}.city-cover-arrow{position:absolute;z-index:1;right:25px;bottom:26px;font-size:27px}
+.city-cover:focus-visible{outline:2px solid #36543d;outline-offset:6px}
+@media(max-width:700px){.town-page{padding-top:20px}.town-heading{display:block;padding-bottom:25px}.town-back{margin-bottom:28px}.town-heading h1 br{display:none}.town-heading h1 em{display:block;margin-top:6px}.town-intro{margin-top:24px}.town-live{margin-bottom:9px}.town-intro p br{display:none}.town-coordinates{display:none}.town-toolbar{padding:8px;gap:5px}.town-toolbar button{padding:9px 8px;font-size:10px}.town-viewport{height:clamp(280px,50vw,420px)}.town-help{flex-direction:column;gap:5px;font-size:9px;padding:12px}.town-info{right:12px;top:12px;width:255px;padding:20px}.town-dpad{left:12px;bottom:14px;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(2,34px)}.town-actions{right:12px;bottom:14px;flex-direction:column;gap:4px}.town-actions button{font-size:10px;padding:8px}.town-story{grid-template-columns:1fr;gap:20px;padding:50px 0}.town-story>.town-eyebrow{grid-column:auto}.town-story>div{font-size:12px}.city-cover-art{padding:24px}.city-cover{width:100%;aspect-ratio:1.5}}
+@media(prefers-reduced-motion:reduce){.city-cover img{transition:none}}
+/* Two rows on narrow screens keep the English window controls reachable too. */
+@media(max-width:700px){.town-toolbar{flex-wrap:wrap}.town-mode{width:100%}.town-settings{width:100%;justify-content:flex-end}}
+/* Fullscreen includes the toolbar, canvas, touch controls and help row. */
+.town-frame:fullscreen,.town-frame.town-fullscreen-fallback{width:100%;height:100dvh;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;background:#f5f6ef}
+.town-frame.town-fullscreen-fallback{position:fixed;inset:0;z-index:10000;width:100vw}
+.town-frame:fullscreen .town-viewport,.town-frame.town-fullscreen-fallback .town-viewport{flex:1;min-height:0;height:auto}
+.town-frame:fullscreen .town-toolbar,.town-frame:fullscreen .town-help,.town-frame.town-fullscreen-fallback .town-toolbar,.town-frame.town-fullscreen-fallback .town-help{flex-shrink:0}
+body.town-fullscreen-open{overflow:hidden}
+/* NPC dialogue panel */
+.town-dialog[hidden]{display:none}
+.town-dialog{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);width:min(380px,calc(100% - 32px));padding:16px 18px 14px;background:#faf7e9;color:#364637;border:2px solid #8a9270;border-radius:3px;box-shadow:4px 4px 0 #273f3866;z-index:7;display:flex;flex-direction:column;gap:10px}
+.town-dialog-name{font-size:10px;letter-spacing:.13em;color:#60785a;text-transform:uppercase}
+.town-dialog-text{font-size:13px;line-height:1.75;color:#364637;margin:0;min-height:2.5em}
+.town-dialog-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:2px}
+.town-dialog-next{font-size:11px;padding:7px 14px;background:#354b38;color:#f0e8c9;border-radius:2px}
+.town-dialog-next:hover{background:#4a6650}
+.town-dialog-close{font-size:18px;padding:0 6px;color:#748068;line-height:1}
+.town-dialog-close:hover{color:#364637}
+@media(max-width:700px){.town-dialog{bottom:14px;font-size:12px}}

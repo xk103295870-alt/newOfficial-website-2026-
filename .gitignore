@@ -1,0 +1,8 @@
+node_modules/
+.docs-build/
+output/
+tmp/
+.claude/
+docs/.vitepress/cache/
+._*
+.DS_Store

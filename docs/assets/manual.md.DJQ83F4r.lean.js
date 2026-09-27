@@ -1,0 +1,1 @@
+import{_ as d,o as r,c as a,ag as l}from"./chunks/framework.Vng7Hdlh.js";const u=JSON.parse('{"title":"操作手册","description":"","frontmatter":{},"headers":[],"relativePath":"manual.md","filePath":"manual.md"}'),o={name:"manual.md"};function e(i,t,h,n,s,b){return r(),a("div",null,[...t[0]||(t[0]=[l("",488)])])}const c=d(o,[["render",e]]);export{u as __pageData,c as default};

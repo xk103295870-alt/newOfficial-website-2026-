@@ -1,0 +1,1 @@
+import{_ as a,o as i,c as t,ag as e}from"./chunks/framework.Vng7Hdlh.js";const c=JSON.parse('{"title":"Webhook 配置","description":"","frontmatter":{},"headers":[],"relativePath":"webhook.md","filePath":"webhook.md"}'),n={name:"webhook.md"};function h(l,s,p,o,d,k){return i(),t("div",null,[...s[0]||(s[0]=[e("",12)])])}const E=a(n,[["render",h]]);export{c as __pageData,E as default};

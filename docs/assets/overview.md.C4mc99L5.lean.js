@@ -1,0 +1,1 @@
+import{_ as e,o as r,c as a,ag as d}from"./chunks/framework.Vng7Hdlh.js";const p=JSON.parse('{"title":"产品概述","description":"","frontmatter":{},"headers":[],"relativePath":"overview.md","filePath":"overview.md"}'),o={name:"overview.md"};function n(i,t,s,l,h,_){return r(),a("div",null,[...t[0]||(t[0]=[d("",6)])])}const u=e(o,[["render",n]]);export{p as __pageData,u as default};
