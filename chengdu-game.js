@@ -6,7 +6,8 @@ const englishStops = ['KUANZHAI ALLEY','TIANFU SQUARE','TAIKOO LI','PANDA BASE',
 const clamp = n => Math.max(0, Math.min(1, n));
 const rand = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
 export function blend(a,b,t) {
- const ac=a.match(/[a-f\d]{2}/gi).map(v=>parseInt(v,16)),bc=b.match(/[a-f\d]{2}/gi).map(v=>parseInt(v,16));
+ const parse=s=>{const m=s.match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)/i);return m?[m[1],m[2],m[3]].map(Number):s.match(/[a-f\d]{2}/gi).map(v=>parseInt(v,16));};
+ const ac=parse(a),bc=parse(b);
  return `rgb(${ac.map((v,i)=>Math.round(v+(bc[i]-v)*clamp(t))).join(',')})`;
 }
 export function nightAt(time,mode) { return mode==='day'?0:mode==='night'?1:clamp((Math.sin(time/90*Math.PI*2-Math.PI/2)+.15)/.9); }
@@ -29,20 +30,87 @@ export function renderStation(c,{time=0,night=0,english=false}={}) {
   c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);
   R(-6,0,12,11,'#eeead7');R(-7,7,4,5,'#273432');R(3,7,4,5,'#273432');R(-7,-6,4,4,'#273432');R(3,-6,4,4,'#273432');R(-6,-4,12,10,'#f7f2dd');R(-4,-1,3,4,'#273432');R(2,-1,3,4,'#273432');R(-1,3,2,1,'#273432');c.restore();
  };
- // Atmosphere and moving clouds.
- for(let y=0;y<190;y+=2) R(0,y,960,2,blend('#8cbfce','#f1e9c6',y/190));
- O(746,49,16,'#f6e8b1');O(746,49,10,'#fff5d1');
- for(let i=0;i<4;i++){
-  const x=((i*271+time*(1.1+i*.2)+80)%1180)-160,y=38+(i%2)*35;
-  P([[x,y+14],[x+15,y+7],[x+27,y+9],[x+41,y-5],[x+52,y-10],[x+69,y+5],[x+84,y+8],[x+96,y+15],[x+130,y+19],[x,y+21]],'#f1f0d9');
-  R(x+30,y+18,76,3,'#d2ddcc');
+
+ // Reusable streetscape details; a fixed seed keeps plantings stable during animation.
+ const warmWindows=[];
+ const shrub=(x,y,w=18)=>{
+  R(x,y,w,5,'#466e4b');R(x+2,y-3,w-4,5,'#70925a');
+  for(let i=3;i<w-2;i+=5)R(x+i,y-2,2,2,'#99b177');
+ };
+ const planter=(x,y,w=24,flowers=false)=>{
+  R(x-1,y+3,w+2,4,'#ad946d');R(x,y+7,w,2,'#786f50');shrub(x,y,w);
+  if(flowers)for(let i=3;i<w-2;i+=4){R(x+i,y-3,2,2,i%3?'#e7b7a3':'#ead08d');}
+ };
+ const shop=(x,y,w=30,h=24,tone='#bca788',sign='')=>{
+  R(x,y,w,h,tone);R(x+w-4,y,4,h,'#8d8469');roof(x,y-2,w);
+  R(x+3,y+9,w-6,h-10,'#47695f');
+  for(let xx=x+5;xx<x+w-5;xx+=9){R(xx,y+11,6,8,'#adc3aa');warmWindows.push([xx,y+11,6,8]);}
+  R(x+2,y+5,w-4,5,'#d9c496');
+  if(sign)T(sign,x+w/2,y+7,4,'#605a40','center');
+  R(x,y+h,w,2,'#dac49c');
+ };
+ const bench=(x,y)=>{R(x,y,15,2,'#ad8c5e');R(x,y+4,15,2,'#846d4e');R(x+2,y+6,2,3,'#4d654a');R(x+11,y+6,2,3,'#4d654a');};
+ // Celestial cycle: one full day-night lap every 90 seconds, so the sun and
+ // moon visibly rise and set. Forced day/night modes park the sun in place.
+ const sunAng=time/90*Math.PI*2+.6;
+ const sunEl=Math.sin(sunAng);
+ night=clamp((.1-sunEl)/.72);
+ const dayT=clamp(sunEl*1.8+.22),dusk=clamp(1-Math.abs(sunEl)*2.4);
+ const top=blend(blend('#0c1830','#6ea6c9',dayT),'#5d6d9e',dusk);
+ const hor=blend(blend('#233250','#f2e9c8',dayT),'#f6a05c',dusk);
+ for(let y=0;y<190;y+=2) R(0,y,960,2,blend(top,hor,y/190));
+ // The sun climbs over the eastern ridge and sinks behind the western one.
+ const sunX=480-Math.cos(sunAng)*440,sunY=168-sunEl*132;
+ if(sunEl>-.06){
+  const glow=c.createRadialGradient(sunX,sunY,0,sunX,sunY,64);
+  glow.addColorStop(0,`rgba(255,214,130,${.45+dusk*.45})`);glow.addColorStop(1,'rgba(255,180,90,0)');
+  c.fillStyle=glow;c.fillRect(sunX-64,sunY-64,128,128);
+  O(sunX,sunY,13,blend('#f6e8b1','#f29b3d',dusk));O(sunX,sunY,8,blend('#fff5d1','#ffd98a',dusk));
+ }
+ // The moon rides the opposite arc once daylight fades.
+ const moonAng=sunAng+Math.PI,moonEl=-sunEl,moonX=480-Math.cos(moonAng)*430,moonY=162-moonEl*112;
+ if(moonEl>-.02){
+  const mglow=c.createRadialGradient(moonX,moonY,0,moonX,moonY,38);
+  mglow.addColorStop(0,`rgba(214,222,205,${.2+night*.28})`);mglow.addColorStop(1,'rgba(214,222,205,0)');
+  c.fillStyle=mglow;c.fillRect(moonX-38,moonY-38,76,76);
+  c.beginPath();c.arc(moonX,moonY,9,0,Math.PI*2);c.arc(moonX+4,moonY-3,4.6,0,Math.PI*2);c.fill('evenodd');
+ }
+ // Clouds: four silhouette templates, varied sizes, and a brisk drift.
+ const cloudCol=blend(blend('#26334e','#f1f0d9',dayT),'#efc39a',dusk*.55);
+ const cloudShapes=[
+  [[0,16],[14,8],[26,11],[38,0],[54,-6],[70,2],[84,6],[96,14],[120,18],[0,20]],
+  [[0,10],[10,4],[22,6],[30,-2],[42,0],[50,8],[64,11],[0,13]],
+  [[0,12],[18,10],[30,2],[44,4],[58,-4],[74,2],[86,10],[104,12],[104,16],[0,16]],
+  [[0,14],[12,6],[20,8],[28,-6],[38,-8],[46,4],[56,0],[66,10],[80,14],[0,17]],
+ ];
+ for(let i=0;i<7;i++){
+  const x=((i*197+time*(2.3+(i%3)*.55)+80)%1320)-190,y=24+(i%4)*22,sc=.75+(i%3)*.28;
+  P(cloudShapes[i%4].map(([px,py])=>[x+px*sc,y+py*sc]),cloudCol);
  }
  // Distant mountains and the Chengdu skyline.
  P([[0,156],[60,135],[115,141],[172,111],[202,118],[246,141],[289,120],[354,142],[405,131],[468,151],[541,124],[607,134],[656,115],[725,143],[797,127],[850,139],[904,116],[960,137],[960,194],[0,194]],'#9bb7a0');
  P([[0,177],[89,161],[164,168],[239,144],[314,170],[404,150],[475,173],[545,148],[655,170],[727,144],[795,167],[885,145],[960,165],[960,224],[0,224]],'#7f9e83');
  for(let i=0;i<49;i++){const x=i*21,h=13+rand(i)*32;R(x,180-h,12+rand(i+3)*9,h,'#88a698');for(let yy=184-h;yy<177;yy+=5)R(x+3,yy,7,1,'#afc2aa');}
+ // Two deeper city layers replace the uniformly low skyline.
+ for(let i=0;i<20;i++){
+  const x=12+i*49,w=20+Math.floor(rand(i+880)*15),h=36+Math.floor(rand(i+881)*62),y=183-h;
+  R(x,y,w,h,i%3?'#86a79e':'#94b1a7');R(x+w-5,y,5,h,'#799990');
+  R(x+4,y-4,w-8,4,'#9db9ac');
+  for(let xx=x+4;xx<x+w-5;xx+=6)for(let yy=y+6;yy<177;yy+=8)R(xx,yy,3,3,'#bfd0b9');
+  if(i%4===0){R(x+5,y+7,2,h-9,'#c4d1b9');R(x+w/2,y-12,1,8,'#6d938a');}
+ }
+ // A slender observation tower, and a recognisable stepped glass roofline.
+ R(586,87,4,93,'#7a9d94');R(579,85,18,6,'#9ab4a3');R(582,79,12,6,'#769c93');R(587,66,2,13,'#73988b');
+ P([[708,180],[708,105],[722,87],[739,105],[739,180]],'#7eaaa3');
+ for(let x=712;x<737;x+=5)R(x,108,2,69,'#aac7b6');
  R(0,185,960,74,'#7f9d65');
  for(let i=0;i<700;i++)R(rand(i+70)*960,191+rand(i+85)*62,1+rand(i+99)*3,1,i%3?'#91ad72':'#678d58');
+ // Infill lanes: tea houses, balconies and neighborhood shops behind the landmarks.
+ for(const [x,y,w,h,tone] of [[5,159,30,26,'#b4aa8c'],[43,153,29,31,'#c7b591'],[80,160,27,25,'#ae9e83'],[115,158,28,27,'#c9b594'],[151,174,23,32,'#ac9c7e'],[272,157,28,28,'#b5b69b'],[359,159,31,28,'#c2ae8d'],[399,162,29,24,'#a9957f'],[433,173,23,30,'#bfaa8b'],[592,175,23,25,'#c2b192'],[696,170,30,29,'#bba385'],[730,163,25,25,'#c9b798'],[865,161,32,28,'#b7ac8f'],[908,164,33,29,'#bda58b']])shop(x,y,w,h,tone);
+ for(const [x,y,z] of [[10,181,.62],[143,184,.66],[163,161,.67],[305,175,.78],[447,183,.58],[459,168,.64],[577,179,.88],[608,159,.6],[688,179,.73],[731,181,.55],[935,166,.79],[955,198,.82]])tree(x,y,z);
+ // The riverfront is a connected promenade, rather than separate monuments on lawn.
+ R(0,234,960,4,'#b5b486');
+ for(const x of [146,301,442,585,702,927]){R(x,208,4,28,'#b9b68b');planter(x-6,229,17,true);}
  // Six deliberately recognizable landmark silhouettes, with detailed facades.
  for(let j=0;j<3;j++){
   const x=18+j*43,y=213+(j%2)*5;
@@ -54,11 +122,10 @@ export function renderStation(c,{time=0,night=0,english=false}={}) {
  R(175,188,126,40,'#c2ba9f');R(180,184,116,5,'#ded4b7');
  for(let yy=191;yy<223;yy+=8)for(let xx=184;xx<292;xx+=13)R(xx,yy,9,3,'#648086');
  R(186,228,104,5,'#dfd6b6');R(230,215,15,15,'#d4cbb0');R(234,192,8,24,'#ece6ce');R(232,189,12,6,'#ece6ce');R(239,181,4,13,'#ece6ce');R(242,178,9,4,'#ece6ce');R(235,183,5,6,'#ece6ce');
- // Taikoo Li low-rise roofs and the climbing IFS panda.
+ // Taikoo Li low-rise roofs.
  R(318,157,32,72,'#b3c0b1');R(321,160,26,60,'#819c9c');
  for(let yy=163;yy<215;yy+=6)R(323,yy,22,2,'#b5cac0');
- panda(332,181,1.7);
- for(let j=0;j<2;j++){const x=355+j*38;R(x,199,34,29,'#ae7e65');roof(x,196,34);window(x+5,203,23,20);R(x+16,202,2,23,'#775649');}
+  for(let j=0;j<2;j++){const x=355+j*38;R(x,199,34,29,'#ae7e65');roof(x,196,34);window(x+5,203,23,20);R(x+16,202,2,23,'#775649');}
  R(347,229,90,3,'#ddc5a3');
  // Bamboo grove and giant panda base.
  for(let j=0;j<14;j++){
@@ -75,12 +142,20 @@ export function renderStation(c,{time=0,night=0,english=false}={}) {
  for(let j=0;j<5;j++){const x=750+j*34;R(x,223,8,15,'#a39e82');P([[x+8,226],[x+17,220],[x+25,226]],'#809e8b');}
  R(752,200,160,18,'#bd8757');for(let x=758;x<910;x+=14){R(x,202,7,12,'#526b65');R(x-2,200,2,18,'#9d6945');}
  roof(748,197,168);R(802,185,54,10,'#d6aa71');roof(798,183,62);
+ // Small planted courtyards between attractions keep their entrances unobstructed.
+ for(const [x,y,w] of [[24,224,32],[84,225,37],[180,235,28],[266,235,25],[358,236,24],[405,235,24],[472,238,27],[538,238,28],[616,243,20],[665,243,19],[773,240,24],[839,240,24],[894,240,24]])planter(x,y,w,true);
+ for(const x of [152,308,449,591,705,937]){R(x,218,1,24,'#65775a');R(x-3,215,7,4,'#c5b780');}
+ for(const x of [66,205,391,514,810])bench(x,234);
  // Footpaths and river shore across the scene.
  R(0,243,960,5,'#d4c193');R(0,251,960,51,'#60a7a7');
  for(let i=0;i<100;i++){const x=(rand(i+2)*980+time*(1+rand(i)))%980-20,y=256+rand(i+4)*41;R(x,y,3+rand(i+7)*13,1,i%4?'#88c6b9':'#b4d8c1');}
  for(let i=0;i<3;i++){const x=(time*(i%2?-2:3)+i*339+960)%1100-50,y=267+i*10;P([[x,y],[x+23,y],[x+19,y+5],[x+4,y+5]],'#746e52');R(x+9,y-8,1,8,'#6b694f');P([[x+10,y-8],[x+10,y-1],[x+19,y-1]],'#e4d4ad');}
  R(0,300,960,4,'#d4c69d');R(0,305,960,24,'#75915b');
  for(let x=0;x<960;x+=18){R(x,307,2,15,'#b7b398');R(x,308,18,2,'#ddd2b0');R(x,317,18,2,'#9fa28a');}
+ // Near-bank garden walk, with small trees and flowering borders above the railway.
+ for(let x=5;x<960;x+=42){shrub(x,306,25);if(x%3===0)planter(x+7,309,18,true);}
+ for(const [x,z] of [[320,.57],[368,.66],[427,.53],[482,.67],[558,.53],[607,.6],[671,.55],[728,.65],[784,.52],[852,.56],[901,.54]])tree(x,304,z, x===427||x===728);
+ for(const x of [346,513,756,872])bench(x,316);
  // Railway, ballast, sleepers. The train runs behind the platform and station.
  R(0,328,960,32,'#7f8275');
  for(let x=0;x<960;x+=10){R(x,334,4,20,'#685f4f');R(x,331,2,1,'#a7a693');}
@@ -114,6 +189,11 @@ export function renderStation(c,{time=0,night=0,english=false}={}) {
  R(839,379,38,18,'#c99c64');R(837,373,43,7,'#e4d2a7');R(845,355,2,19,'#6b7655');P([[830,358],[856,350],[884,358]],'#b85643');O(845,400,3,'#3b5242');O(872,400,3,'#3b5242');T('茶',854,388,9,'#6b543c','center');
  // Trees are planted to the sides of the station, leaving the doors clear.
  tree(10,351,1.5);tree(296,350,1.3);tree(937,351,1.8);tree(708,357,1.1,true);
+ // Kiosks and planted waiting areas sit at the back edge of the forecourt.
+ shop(327,367,40,17,'#bba078',english?'BOOKS':'书报');
+ shop(716,366,29,18,'#c7b795',english?'COFFEE':'咖啡');
+ for(const [x,w] of [[274,23],[505,19],[619,33],[769,20],[888,21]])planter(x,384,w,true);
+ R(574,354,104,2,'#7a9769');for(let x=576;x<680;x+=12)shrub(x,349,12);
  // Tourists actually cross the platform, with alternating footfalls and little shadows.
  for(let i=0;i<23;i++){
   const speed=i%3===0?3:1.6,dir=i%2?1:-1;
@@ -128,12 +208,24 @@ export function renderStation(c,{time=0,night=0,english=false}={}) {
   R(x,y,1,2+rand(i+8)*3,i%3?'#769a55':'#91a965');
   if(i%17===0){R(x-1,y-1,3,2,i%2?'#d6cb8b':'#c6a095');}
  }
- // One world-wide grade makes every building, person and tree participate in night.
+ // A foreground pocket park: winding path, planted beds, tea pavilion and bamboo.
+ P([[0,442],[128,442],[156,430],[280,430],[325,444],[479,444],[527,431],[665,431],[714,445],[837,445],[882,433],[960,433],[960,442],[886,442],[840,454],[710,454],[661,440],[531,440],[482,453],[322,453],[276,439],[159,439],[130,451],[0,451]],'#b9b38a');
+ for(const [x,y,w] of [[18,427,43],[93,460,39],[237,458,49],[344,425,46],[461,462,33],[561,451,50],[719,463,43],[818,425,29],[889,458,39]])planter(x,y,w,true);
+ for(const [x,y,z,flower] of [[24,454,.88,false],[74,463,1.1,false],[186,464,1.04,true],[309,467,.8,false],[390,459,1.04,false],[443,471,.96,true],[557,476,.8,false],[679,463,1.04,false],[777,476,1.08,false],[930,468,1.04,true]])tree(x,y,z,flower);
+ // Open tea pavilion: four posts and a light roof, leaving the path visible behind it.
+ for(const x of [595,630])R(x,430,3,29,'#89764f');
+ roof(589,427,50);R(596,452,34,3,'#a5895c');R(612,442,5,12,'#72654a');R(604,441,22,3,'#bba275');
+ for(const [x,y] of [[134,464],[508,466],[844,465]])bench(x,y);
+ for(let j=0;j<9;j++){const x=877+j*4,y=449-(j%3)*5;R(x,y,1,29,'#3d6c47');for(let yy=y+4;yy<474;yy+=7){R(x,yy,2,1,'#aabc7d');P([[x,yy],[x-5,yy-4],[x-2,yy-4]],'#89a362');}}
+ // Slow butterflies make the park feel alive without obscuring the train or visitors.
+ for(let i=0;i<5;i++){const x=110+i*171+Math.sin(time*.45+i)*13,y=433+Math.cos(time*.7+i)*5;R(x,y,1,3,'#7e684b');R(x-3,y-1,2,2,i%2?'#e4b6a5':'#e4cf86');R(x+1,y-1,2,2,i%2?'#e4b6a5':'#e4cf86');}
+ // A brief warm grade at sunrise and sunset, then the world-wide night grade.
+ if(dusk>.02){c.globalAlpha=dusk*.15;R(0,0,960,480,'#f4a24f');c.globalAlpha=1;}
  c.globalAlpha=night*.74;R(0,0,960,480,'#0b1636');c.globalAlpha=1;
  if(night>.05){
   c.globalAlpha=night;
   for(let i=0;i<62;i++){const x=rand(i+520)*960,y=8+rand(i+440)*105;R(x,y,1,1,blend('#8f99b6','#e9e3cc',(Math.sin(time*.9+i)+1)/2));}
-  O(791,46,10,'#d6dccd');O(796,41,10,'#17243e');
+  for(const [x,y,w,h] of warmWindows)R(x,y,w,h,'#c6ae78');
   // warm lights in glass, train and pavilion
   for(let x=51;x<245;x+=14)R(x,340,9,11,'#c9af72');
   for(let j=0;j<3;j++)for(let k=0;k<6;k++)R(trainX+j*165+14+k*23,323,13,8,'#d7bd83');
@@ -162,19 +254,17 @@ export async function mountTown(host,{onReady=()=>{},onError=()=>{}}={}) {
  try{
   const canvas=document.createElement('canvas');canvas.width=WIDTH;canvas.height=HEIGHT;canvas.setAttribute('role','img');host.replaceChildren(canvas);
   const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Canvas unavailable');ctx.imageSmoothingEnabled=false;
-  const buttons=[...document.querySelectorAll('[data-scene-control]:not(#scene-pause)')],pause=document.getElementById('scene-pause');
+  const pause=document.getElementById('scene-pause');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  let mode='auto',paused=reduced.matches,time=0,previous=performance.now(),visible=true;
+  let paused=reduced.matches,time=0,previous=performance.now(),visible=true;
   const english=()=>document.documentElement.lang.startsWith('en');
-  const paint=()=>renderStation(ctx,{time,night:nightAt(time,mode),english:english()});
+  const paint=()=>renderStation(ctx,{time,night:nightAt(time,'auto'),english:english()});
   const sync=()=>{
-   buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.sceneControl===mode)));
    pause.textContent=paused?(english()?'Play':'继续播放'):(english()?'Pause':'暂停');pause.setAttribute('aria-pressed',String(paused));
    canvas.setAttribute('aria-label',english()?'Chengdu Tianfu Station: animated train, visitors and six Chengdu landmarks.':'成都天府站：列车、游客和六个成都景点的动态像素长景');
   };
   const tick=now=>{raf=0;if(destroyed)return;const dt=Math.min((now-previous)/1000,.1);previous=now;if(!paused&&!document.hidden&&visible)time+=dt;paint();if(!paused&&!document.hidden&&visible)raf=requestAnimationFrame(tick);};
   const resume=()=>{previous=performance.now();if(raf)cancelAnimationFrame(raf);raf=0;paint();if(!paused&&!document.hidden&&visible)raf=requestAnimationFrame(tick);};
-  buttons.forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.sceneControl;sync();paint();},opts));
   pause.addEventListener('click',()=>{paused=!paused;sync();resume();},opts);
   document.addEventListener('visibilitychange',resume,opts);
   reduced.addEventListener('change',event=>{paused=event.matches;sync();resume();},opts);

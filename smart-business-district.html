@@ -13,12 +13,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=work-card-hover-20260927" />
-  <link rel="stylesheet" href="product.css?v=6e90b3200a" />
+  <link rel="stylesheet" href="product.css?v=20260928-hero-type-aligned" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script src="main.js?v=8ab71c5517" defer></script>
   <script src="hero-ocean.js?v=27fb4c974a" defer></script>
-  <script src="district-map.js?v=20260927" defer></script>
+  <script src="district-map.js?v=20260928" defer></script>
   <noscript><style>.lang-switch,.menu-toggle{display:none!important}@media(max-width:1000px){.nav-links{display:flex;position:static;grid-column:1/-1;grid-row:2;flex-wrap:wrap;padding:0 0 16px;gap:16px}.nav-inner{padding-top:12px}}</style></noscript>
 </head>
 <body id="top" data-page="district">
@@ -44,7 +44,13 @@
   </div>
 </header>
 
-<main id="main"><section class="product-hero hero container"><canvas class="hero-ocean" aria-hidden="true"></canvas><h1 class="product-hero-title" id="district-hero-title"><span class="hero-line hero-line-1" data-en="Business">商业</span><span class="hero-line hero-line-2"><span class="hero-amp">&amp;</span><span class="hero-word" data-en="Membership">会员</span></span></h1><div class="product-hero-bottom"><h2 data-en="Every payment.<br>A lasting connection.">支付即积分，<br>会员即资产。</h2><div><p data-en="Connect payments, membership and rewards. An integrated CRM solution for shopping centers, retail streets and transport hubs.">连接支付、会员与权益，为购物中心、百货商场、商业街区及交通枢纽商业，打造一体化数字运营体验。</p></div></div></section>
+<main id="main"><section class="product-hero hero container" aria-labelledby="district-hero-title">
+  <canvas class="hero-ocean" aria-hidden="true"></canvas>
+  <div class="hero-eyebrow">
+    <p class="eyebrow-label" data-en="WNTC / DIGITAL PRODUCT">WNTC / 数字产品</p>
+    <p class="eyebrow-line" data-en="District membership · Integrated digital operations">商圈会员 · 一体化数字运营</p>
+  </div>
+  <h1 class="product-hero-title" id="district-hero-title"><span class="hero-line hero-line-1" data-en="Business">商业</span><span class="hero-line hero-line-2"><span class="hero-amp">&amp;</span><span class="hero-word" data-en="Membership">会员</span></span></h1><div class="product-hero-bottom"><h2 data-en="Every payment.<br>A lasting connection.">支付即积分，<br>会员即资产。</h2><div><p data-en="Connect payments, membership and rewards. An integrated CRM solution for shopping centers, retail streets and transport hubs.">连接支付、会员与权益，为购物中心、百货商场、商业街区及交通枢纽商业，打造一体化数字运营体验。</p></div></div></section>
  <section class="district-map-section" id="project-map" aria-label="服务项目地图" data-en-label="Project map">
   <div class="district-map-inner">
     <span class="district-map-caption" data-en="TEAM SERVICES">团队服务项目</span>
@@ -52,16 +58,17 @@
       <div class="district-map-visual">
         <div class="district-map-canvas" id="district-map-canvas">
           <svg class="district-map-svg" role="img" aria-label="亚洲服务项目地图" data-en-label="Asia project map"></svg>
-          <div class="district-map-tooltip" id="district-map-tooltip" role="dialog" aria-live="polite" hidden><button class="district-map-tooltip-close" type="button" aria-label="关闭">×</button><span class="district-map-tooltip-kicker"></span><h3></h3><p></p><span class="district-map-tooltip-meta"></span></div>
+          <div class="district-map-tooltip" id="district-map-tooltip" role="dialog" aria-live="polite" hidden></div>
         </div>
       </div>
       <aside class="district-region-list" aria-label="服务区域选择" data-en-label="Service region selector">
         <p class="district-region-list-label" data-en="REGIONS">服务区域</p>
-        <div class="district-region-tabs">
-          <button class="district-region-tab" type="button" data-region="chongqing" aria-selected="true" aria-controls="district-region-projects" data-en="Chongqing">重庆</button>
-          <button class="district-region-tab" type="button" data-region="sichuan" aria-selected="false" aria-controls="district-region-projects" data-en="Sichuan">四川</button>
-          <button class="district-region-tab" type="button" data-region="shanxi" aria-selected="false" aria-controls="district-region-projects" data-en="Shanxi">山西</button>
-          <button class="district-region-tab" type="button" data-region="zhejiang" aria-selected="false" aria-controls="district-region-projects" data-en="Zhejiang">浙江</button>
+        <div class="district-glass-toggle" id="district-glass-toggle" role="tablist" aria-label="服务区域" data-en-label="Service regions">
+          <span class="district-glass-toggle-thumb" aria-hidden="true"></span>
+          <button class="district-glass-toggle-option" type="button" role="tab" data-region="chongqing" aria-selected="true" data-en="Chongqing">重庆</button>
+          <button class="district-glass-toggle-option" type="button" role="tab" data-region="sichuan" aria-selected="false" data-en="Sichuan">四川</button>
+          <button class="district-glass-toggle-option" type="button" role="tab" data-region="shanxi" aria-selected="false" data-en="Shanxi">山西</button>
+          <button class="district-glass-toggle-option" type="button" role="tab" data-region="zhejiang" aria-selected="false" data-en="Zhejiang">浙江</button>
         </div>
         <div class="district-region-projects" id="district-region-projects">
           <p class="district-project-list-label" data-en="PROJECTS">区域项目</p>

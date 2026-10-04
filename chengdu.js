@@ -4,7 +4,7 @@ if (host) {
   const error = document.getElementById('town-error');
   const loading = document.getElementById('town-loading');
   try {
-    const { mountTown } = await import('./chengdu-game.js?v=tianfu-1');
+    const { mountTown } = await import('./chengdu-game.js?v=tianfu-gardens-20261004h');
     const station = await mountTown(host, {
       onError() { loading.hidden = true; error.hidden = false; },
       onReady() { loading.hidden = true; document.querySelectorAll('[data-scene-control], #scene-pause').forEach(button => { button.disabled = false; }); },

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200" viewBox="0 0 300 360" shape-rendering="crispEdges">
+<title>成都天府站 · 像素旅行</title><desc>竖版成都旅行海报：夕阳、山峦、望江楼、车站、青绿列车与竹林中的熊猫。</desc>
+<defs>
+<clipPath id="artwork"><rect x="12" y="12" width="276" height="336"/></clipPath>
+ <pattern id="paper" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="#fff8df" opacity=".12"/></pattern>
+ <symbol id="tree" viewBox="0 0 28 46"><path fill="#425e50" d="M12 24h4v22h-4z"/><path fill="#386455" d="M8 0h12v4h4v8h4v16h-4v8H4v-8H0V12h4V4h4z"/><path fill="#719477" d="M8 4h12v4H8zM4 12h12v8H4zM12 24h12v4H12z"/></symbol>
+ <symbol id="lantern" viewBox="0 0 12 28"><path fill="#d7974d" d="M5 0h2v6H5zM5 22h2v6H5z"/><path fill="#c55f41" d="M3 6h6v2h3v12H9v2H3v-2H0V8h3z"/><path fill="#efb96a" d="M3 9h3v10H3z"/></symbol>
+ <symbol id="house" viewBox="0 0 50 42"><path fill="#e6d6a3" d="M5 17h40v25H5z"/><path fill="#bfa979" d="M35 17h10v25H35z"/><path fill="#294f4c" d="M0 16h5v-4h5V8h5V4h20v4h5v4h5v4h5v5H0z"/><path fill="#739182" d="M10 12h30v3H10z"/><path fill="#395d55" d="M10 25h8v10h-8zM22 24h8v18h-8zM35 25h6v10h-6z"/></symbol>
+</defs>
+<rect width="300" height="360" fill="#f3e9ce"/>
+<g clip-path="url(#artwork)">
+<rect x="12" y="12" width="276" height="336" fill="#c7d7c5"/>
+<!-- Stepped sun and distant mountain ridges. -->
+<path fill="#d88b56" d="M214 32h28v4h8v8h4v28h-4v8h-8v4h-28v-4h-8v-8h-4V44h4v-8h8z"/>
+<path fill="#f5ecd3" d="M28 48h20v-4h24v4h12v4h16v4H28zM126 30h16v-4h20v4h12v4h12v4h-60zM228 95h20v-4h24v4h16v5h-60z"/>
+<path fill="#9ebcb0" d="M12 139v-25h8v-8h12v-8h12v-8h12v-8h12v-8h12v8h12v8h12v8h12v8h12v8h12v8h12v-8h12v-8h12v-8h12v8h12v8h12v8h12v8h16v-8h12v-8h12v-8h12v8h12v8h12v8h12v14z"/>
+<path fill="#719b8b" d="M12 149v-16h16v-8h16v-8h16v8h16v8h16v8h20v-8h16v-8h16v-8h16v-8h16v8h16v8h16v8h16v8h20v-8h16v-8h16v8h16v8h16v16z"/>
+<!-- A compact city silhouette beyond the river. -->
+<path fill="#8caa98" d="M36 135v-34h12v-8h14v42h8v-23h15v-8h12v31h28V88h8v-8h5v8h9v47h16v-27h20v27h45v-25h12v-6h16v31z"/>
+<path fill="#c7d5b6" d="M41 105h3v18h-3zM53 100h4v26h-4zM130 98h3v29h-3zM140 97h3v30h-3zM172 113h4v15h-4z"/>
+<path fill="#508f8a" d="M12 149h276v73H12z"/>
+<path fill="#a4c6ac" d="M12 146h276v5H12z"/>
+
+<rect x="21" y="159" width="24" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="100" y="165" width="42" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="170" y="154" width="25" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="237" y="169" width="34" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="33" y="185" width="42" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="141" y="194" width="22" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="199" y="187" width="43" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="85" y="206" width="37" height="2" fill="#b8d7bc" opacity=".7"/>
+<rect x="247" y="211" width="28" height="2" fill="#b8d7bc" opacity=".7"/>
+<!-- Covered bridge and riverside architecture. -->
+<path fill="#d8c38f" d="M168 154h113v8H168zM176 162h7v19h-7zM207 162h7v19h-7zM239 162h7v19h-7zM273 162h7v19h-7z"/>
+<path fill="#315953" d="M166 152h118v4H166zM171 147h109v5H171zM178 142h95v5h-95z"/>
+<path fill="#ebd7a3" d="M186 114h46v32h-46zM191 91h36v24h-36zM196 73h26v20h-26z"/>
+<path fill="#b79865" d="M220 74h2v66h-2zM201 76h4v12h-4zM197 95h4v14h-4zM207 95h4v14h-4zM217 95h4v14h-4zM192 118h5v25h-5zM205 118h5v25h-5zM218 118h5v25h-5z"/>
+<path fill="#244e49" d="M177 111h64v5h-64zM182 106h54v5h-54zM187 101h44v5h-44zM186 89h47v5h-47zM192 84h35v5h-35zM198 79h23v5h-23zM191 71h36v5h-36zM196 67h26v4h-26zM202 63h14v4h-14zM207 55h4v8h-4z"/>
+<path fill="#cfa869" d="M179 115h60v2h-60zM188 93h43v2h-43zM193 75h32v2h-32z"/>
+<use href="#tree" x="145" y="112" width="24" height="40"/>
+<use href="#tree" x="255" y="110" width="25" height="41"/>
+<!-- Near-bank station, lanterns and platform. -->
+<path fill="#b1b994" d="M12 203h122v-10h24v13h130v43H12z"/>
+<use href="#house" x="28" y="164" width="58" height="49"/>
+<use href="#house" x="91" y="175" width="47" height="40"/>
+<path fill="#ebd6a4" d="M23 191h95v50H23z"/>
+<path fill="#2a514b" d="M16 189h110v7H16zM23 184h96v5H23zM29 179h84v5H29z"/>
+<path fill="#46695c" d="M30 210h15v31H30zM54 210h15v31H54zM78 210h15v31H78zM102 210h9v31h-9z"/>
+<path fill="#9cb79c" d="M32 212h11v14H32zM56 212h11v14H56zM80 212h11v14H80z"/>
+<rect x="43" y="198" width="57" height="9" fill="#33594d"/>
+<text x="71.5" y="205" text-anchor="middle" font-size="6" letter-spacing="1" font-family="sans-serif" fill="#f4e5bd">成都 · 天府站</text>
+<use href="#lantern" x="21" y="196" width="9" height="21"/><use href="#lantern" x="109" y="196" width="9" height="21"/>
+<use href="#tree" x="137" y="181" width="24" height="40"/>
+<path fill="#d7c293" d="M12 236h276v14H12z"/><path fill="#96886b" d="M12 246h276v5H12z"/>
+<path fill="#40564e" d="M12 251h276v28H12z"/>
+
+<rect x="18" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="30" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="42" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="54" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="66" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="78" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="90" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="102" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="114" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="126" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="138" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="150" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="162" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="174" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="186" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="198" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="210" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="222" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="234" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="246" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="258" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="270" y="253" width="4" height="25" fill="#ac9370"/>
+<rect x="282" y="253" width="4" height="25" fill="#ac9370"/>
+<path stroke="#d3c49d" stroke-width="2" d="M12 257h276M12 272h276"/>
+<!-- Teal train: strong foreground silhouette, warm cabin windows. -->
+<path fill="#284b48" d="M25 253h188v8H25zM37 258h12v7H37zM174 258h12v7h-12z"/>
+<path fill="#e9d9b4" d="M25 223h160v4h13v8h9v17H25z"/>
+<path fill="#327974" d="M25 244h182v9H25zM25 221h152v5H25z"/>
+<path fill="#235853" d="M30 230h21v11H30zM57 230h21v11H57zM84 230h21v11H84zM111 230h21v11h-21zM141 229h17v24h-17zM164 230h20v4h7v7h-27z"/>
+<path fill="#edc477" d="M32 232h17v7H32zM59 232h17v7H59zM86 232h17v7H86zM113 232h17v7h-17zM143 231h13v9h-13zM166 232h16v4h7v3h-23z"/>
+<path fill="#b9a880" d="M53 226h2v25h-2zM135 226h2v25h-2z"/>
+<rect x="200" y="243" width="5" height="4" fill="#f8df8b"/>
+<!-- Bamboo garden and panda, distinct from an in-game screenshot. -->
+<path fill="#5a7b5d" d="M12 280h48v-5h46v5h64v-8h66v5h52v71H12z"/>
+<path fill="#355d4e" d="M12 299h34v-6h36v6h65v-8h38v7h55v-9h48v59H12z"/>
+<path fill="#d2bf8f" d="M27 348v-15h18v-10h26v-9h35v-8h28v-7h21v-7h18v-9h16v9h-10v9h-17v10h-19v9h-27v9H85v10H67v9z"/>
+<path fill="#89a274" d="M246 192h4v121h-4zM265 183h4v134h-4zM277 211h3v110h-3z"/>
+<path fill="#315d4b" d="M233 201h13v4h-9v4h-8v-4h4zM250 210h10v-4h10v4h-6v4h-14zM254 185h11v4h-7v4h-8v-4h4zM269 197h10v-4h9v4h-5v4h-14zM265 226h-10v-4h-8v4h4v4h14zM279 245h9v4h-9z"/>
+<path fill="#172f30" d="M203 277h37v5h7v24h-7v12h-39v-7h-10v-18h5v-11h7z"/>
+<path fill="#efe8cd" d="M205 277h27v6h5v17h-5v8h-26v-6h-5v-18h4z"/>
+<path fill="#172f30" d="M195 254h10v10h-10zM235 254h10v11h-10z"/>
+<path fill="#f8efd8" d="M207 252h25v5h8v8h5v17h-5v8h-8v4h-28v-4h-8v-9h-3v-14h5v-10h9z"/>
+<path fill="#263c38" d="M203 267h9v4h4v8h-5v4h-9v-5h-3v-7h4zM228 267h9v4h4v7h-4v5h-9v-4h-4v-8h4zM216 282h10v4h-4v3h-3v-3h-3z"/>
+<path fill="#fff9e6" d="M207 270h3v3h-3zM231 270h3v3h-3z"/>
+<path fill="#172f30" d="M197 297h12v7h-4v11h-14v-9h6zM232 299h13v7h6v9h-17v-8h-2z"/>
+<path fill="#9ab67c" d="M238 282h3v32h-3zM229 280h9v4h-9zM241 289h9v4h-9z"/>
+
+<rect x="280" y="323" width="5" height="2" fill="#91a47c"/>
+<rect x="196" y="332" width="2" height="2" fill="#b6b18a"/>
+<rect x="16" y="284" width="3" height="2" fill="#b6b18a"/>
+<rect x="178" y="290" width="2" height="2" fill="#759171"/>
+<rect x="103" y="287" width="3" height="2" fill="#b6b18a"/>
+<rect x="184" y="287" width="3" height="2" fill="#b6b18a"/>
+<rect x="265" y="317" width="2" height="2" fill="#759171"/>
+<rect x="49" y="293" width="2" height="2" fill="#91a47c"/>
+<rect x="85" y="287" width="3" height="2" fill="#759171"/>
+<rect x="43" y="293" width="5" height="2" fill="#91a47c"/>
+<rect x="25" y="290" width="2" height="2" fill="#b6b18a"/>
+<rect x="226" y="341" width="5" height="2" fill="#b6b18a"/>
+<rect x="229" y="341" width="2" height="2" fill="#759171"/>
+<rect x="271" y="299" width="5" height="2" fill="#91a47c"/>
+<rect x="109" y="293" width="2" height="2" fill="#759171"/>
+<rect x="157" y="299" width="5" height="2" fill="#759171"/>
+<rect x="274" y="332" width="5" height="2" fill="#759171"/>
+<rect x="172" y="299" width="5" height="2" fill="#b6b18a"/>
+<rect x="19" y="317" width="3" height="2" fill="#b6b18a"/>
+<rect x="109" y="299" width="5" height="2" fill="#759171"/>
+<rect x="184" y="323" width="5" height="2" fill="#91a47c"/>
+<rect x="268" y="311" width="2" height="2" fill="#91a47c"/>
+<rect x="109" y="299" width="3" height="2" fill="#759171"/>
+<rect x="145" y="296" width="2" height="2" fill="#b6b18a"/>
+<rect x="112" y="296" width="5" height="2" fill="#b6b18a"/>
+<rect x="244" y="323" width="3" height="2" fill="#b6b18a"/>
+<rect x="67" y="284" width="3" height="2" fill="#b6b18a"/>
+<rect x="64" y="284" width="3" height="2" fill="#b6b18a"/>
+<rect x="238" y="323" width="3" height="2" fill="#b6b18a"/>
+<rect x="169" y="296" width="2" height="2" fill="#759171"/>
+<rect x="52" y="299" width="2" height="2" fill="#b6b18a"/>
+<rect x="187" y="296" width="2" height="2" fill="#759171"/>
+<rect x="265" y="311" width="2" height="2" fill="#91a47c"/>
+<rect x="79" y="299" width="2" height="2" fill="#91a47c"/>
+<rect x="12" y="12" width="276" height="336" fill="url(#paper)" pointer-events="none"/></g></svg>

@@ -1,12 +1,15 @@
 'use strict';
 
 // D3 + GeoJSON service-region selector for the Smart District page.
-// The map highlight follows the selected region; the tooltip appears after a project is selected.
+// The glass toggle below the map switches the active region; clicking the
+// highlighted map point opens the region's project list, and clicking a
+// project opens its detail inside the same popup.
 (() => {
   const canvas = document.getElementById('district-map-canvas');
   const svgElement = canvas?.querySelector('.district-map-svg');
   const tooltip = document.getElementById('district-map-tooltip');
-  if (!canvas || !svgElement || !tooltip || !window.d3 || !window.topojson) return;
+  const toggle = document.getElementById('district-glass-toggle');
+  if (!canvas || !svgElement || !tooltip || !toggle || !window.d3 || !window.topojson) return;
 
   const regions = {
     chongqing: {
@@ -103,73 +106,146 @@
     },
   };
 
-  const regionTabs = [...document.querySelectorAll('.district-region-tab')];
+  const toggleThumb = toggle.querySelector('.district-glass-toggle-thumb');
+  const regionTabs = [...toggle.querySelectorAll('.district-glass-toggle-option')];
   const projectItems = document.querySelector('.district-project-items');
   const emptyNote = document.querySelector('.district-region-empty');
   const projectListLabel = document.querySelector('.district-project-list-label');
   let language = document.documentElement.lang === 'en' ? 'en' : 'zh';
   let activeRegion = 'chongqing';
   let activeProject = null;
+  let tooltipMode = null; // 'region' | 'project'
+
+  function moveToggleThumb() {
+    if (!toggleThumb) return;
+    const active = regionTabs.find(tab => tab.dataset.region === activeRegion);
+    if (!active) return;
+    toggleThumb.style.width = `${active.offsetWidth}px`;
+    toggleThumb.style.transform = `translateX(${active.offsetLeft}px)`;
+  }
 
   function renderProjects() {
     if (!projectItems || !emptyNote) return;
     projectItems.innerHTML = '';
     const region = regions[activeRegion];
-    const entries = Object.entries(region.projects || {});
+    const entries = Object.entries(region?.projects || {});
     emptyNote.hidden = entries.length > 0;
-    if (projectListLabel) {
-      projectListLabel.textContent = language === 'en' ? 'PROJECTS' : '区域项目';
-    }
+    if (projectListLabel) projectListLabel.textContent = language === 'en' ? 'PROJECTS' : '区域项目';
     entries.forEach(([key, project]) => {
       const button = document.createElement('button');
       button.className = 'district-project-item';
       button.type = 'button';
-      button.dataset.project = key;
       button.setAttribute('aria-selected', String(key === activeProject));
-      button.innerHTML = [
-        `<span class="district-project-logo ${project.logoClass}" aria-hidden="true">${project.logo}</span>`,
-        '<span class="district-project-copy">',
-        `<strong>${project[language][0]}</strong>`,
-        `<small>${project[language][1]}</small>`,
-        '</span>',
-        '<span class="district-project-arrow" aria-hidden="true">↗</span>',
-      ].join('');
-      button.addEventListener('click', () => {
-        activeProject = key;
-        renderProjects();
-        showProjectTooltip(key);
-      });
+      const copy = document.createElement('span');
+      copy.className = 'district-project-copy';
+      const title = document.createElement('strong');
+      title.textContent = project[language][0];
+      const category = document.createElement('small');
+      category.textContent = project[language][1];
+      copy.append(title, category);
+      const arrow = document.createElement('span');
+      arrow.className = 'district-project-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '↗';
+      button.append(copy, arrow);
+      button.addEventListener('click', () => showProjectTooltip(key));
       projectItems.append(button);
     });
   }
 
-  function showTooltip(project, point) {
-    const content = project[language];
-    const kicker = tooltip.querySelector('.district-map-tooltip-kicker');
-    const title = tooltip.querySelector('h3');
-    const copy = tooltip.querySelector('p');
-    const meta = tooltip.querySelector('.district-map-tooltip-meta');
-    if (kicker) kicker.textContent = content[1];
-    if (title) title.textContent = content[0];
-    if (copy) copy.textContent = content[3];
-    if (meta) meta.textContent = content[2];
-    tooltip.hidden = false;
+  function tooltipShell() {
+    tooltip.innerHTML = '';
+    const close = document.createElement('button');
+    close.className = 'district-map-tooltip-close';
+    close.type = 'button';
+    close.setAttribute('aria-label', language === 'en' ? 'Close' : '关闭');
+    close.textContent = '×';
+    close.addEventListener('click', hideTooltip);
+    tooltip.append(close);
+  }
+
+  function positionTooltip(point) {
     const bounds = canvas.getBoundingClientRect();
-    const x = Math.min(Math.max(point[0] + 18, 18), bounds.width - 286);
-    const y = Math.min(Math.max(point[1] - 18, 18), bounds.height - 176);
+    tooltip.hidden = false;
+    const width = tooltip.offsetWidth;
+    const height = tooltip.offsetHeight;
+    const x = Math.min(Math.max(point[0] + 18, 18), Math.max(18, bounds.width - width - 18));
+    const y = Math.min(Math.max(point[1] - 18, 18), Math.max(18, bounds.height - height - 18));
     tooltip.style.left = `${x}px`;
     tooltip.style.top = `${y}px`;
   }
 
+  function showRegionTooltip() {
+    const region = regions[activeRegion];
+    const projection = svgElement.__districtMapProjection;
+    if (!region || !projection) return;
+    tooltipMode = 'region';
+    activeProject = null;
+    renderProjects();
+    tooltipShell();
+    const kicker = document.createElement('span');
+    kicker.className = 'district-map-tooltip-kicker';
+    kicker.textContent = language === 'en' ? 'REGION PROJECTS' : '区域项目';
+    const title = document.createElement('h3');
+    title.textContent = region[language];
+    const list = document.createElement('div');
+    list.className = 'district-map-tooltip-projects';
+    Object.entries(region.projects || {}).forEach(([key, project]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.project = key;
+      const copy = document.createElement('span');
+      copy.className = 'district-map-tooltip-project-copy';
+      const strong = document.createElement('strong');
+      strong.textContent = project[language][0];
+      const small = document.createElement('small');
+      small.textContent = project[language][1];
+      copy.append(strong, small);
+      const arrow = document.createElement('span');
+      arrow.className = 'district-map-tooltip-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '↗';
+      button.append(copy, arrow);
+      button.addEventListener('click', () => showProjectTooltip(key));
+      list.append(button);
+    });
+    tooltip.append(kicker, title, list);
+    positionTooltip(projection(region.coordinates));
+  }
+
   function hideTooltip() {
     tooltip.hidden = true;
+    tooltipMode = null;
+    activeProject = null;
   }
 
   function showProjectTooltip(projectKey) {
+    const region = regions[activeRegion];
+    const project = region?.projects?.[projectKey];
     const projection = svgElement.__districtMapProjection;
-    const project = regions[activeRegion]?.projects?.[projectKey];
-    if (!projection || !project) return;
-    showTooltip(project, projection(regions[activeRegion].coordinates));
+    if (!region || !project || !projection) return;
+    tooltipMode = 'project';
+    activeProject = projectKey;
+    renderProjects();
+    tooltipShell();
+    const back = document.createElement('button');
+    back.className = 'district-map-tooltip-back';
+    back.type = 'button';
+    back.textContent = language === 'en' ? '← All projects' : '← 全部项目';
+    back.addEventListener('click', showRegionTooltip);
+    const content = project[language];
+    const kicker = document.createElement('span');
+    kicker.className = 'district-map-tooltip-kicker';
+    kicker.textContent = content[1];
+    const title = document.createElement('h3');
+    title.textContent = content[0];
+    const copy = document.createElement('p');
+    copy.textContent = content[3];
+    const meta = document.createElement('span');
+    meta.className = 'district-map-tooltip-meta';
+    meta.textContent = content[2];
+    tooltip.append(back, kicker, title, copy, meta);
+    positionTooltip(projection(region.coordinates));
   }
 
   function drawMap(geojson) {
@@ -204,8 +280,13 @@
     Object.entries(regions).forEach(([key, region]) => {
       const point = projection(region.coordinates);
       const group = regionLayer.append('g').attr('class', `district-map-region${key === activeRegion ? ' is-selected' : ''}`).attr('data-region', key).attr('transform', `translate(${point[0]},${point[1]})`);
-      group.append('circle').attr('class', 'district-map-pulse').attr('r', 17).attr('stroke', region.color);
-      group.append('circle').attr('class', 'district-map-dot').attr('r', 5).attr('fill', region.color);
+      group.append('circle').attr('class', 'district-map-hit').attr('r', 16).attr('fill', 'transparent');
+      group.append('circle').attr('class', 'district-map-pulse').attr('r', 17).attr('stroke', region.color).attr('pointer-events', 'none');
+      group.append('circle').attr('class', 'district-map-dot').attr('r', 5).attr('fill', region.color).attr('pointer-events', 'none');
+      group.style('cursor', 'pointer').on('click', () => {
+        if (key !== activeRegion) setActiveRegion(key);
+        showRegionTooltip();
+      });
     });
 
     svgElement.__districtMapProjection = projection;
@@ -216,19 +297,24 @@
     activeRegion = regionKey;
     activeProject = null;
     regionTabs.forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.region === regionKey)));
-    renderProjects();
     hideTooltip();
+    moveToggleThumb();
+    renderProjects();
     if (svgElement.__districtMapGeojson) drawMap(svgElement.__districtMapGeojson);
   }
 
   regionTabs.forEach(tab => tab.addEventListener('click', () => setActiveRegion(tab.dataset.region)));
-  tooltip.querySelector('.district-map-tooltip-close')?.addEventListener('click', hideTooltip);
   document.addEventListener('wntc:language', event => {
     language = event.detail;
     regionTabs.forEach(tab => { tab.textContent = regions[tab.dataset.region][language]; });
+    requestAnimationFrame(moveToggleThumb);
     renderProjects();
-    if (activeProject) showProjectTooltip(activeProject);
+    if (tooltipMode === 'project' && activeProject) showProjectTooltip(activeProject);
+    else if (tooltipMode === 'region') showRegionTooltip();
   });
+  window.addEventListener('resize', moveToggleThumb);
+  window.addEventListener('load', moveToggleThumb);
+  requestAnimationFrame(moveToggleThumb);
 
   async function loadMap() {
     try {

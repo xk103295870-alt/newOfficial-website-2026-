@@ -14,6 +14,7 @@ body[data-page=chengdu]{background:#fff;color:#202820}
 .town-mode,.town-settings{display:flex;align-items:center;gap:5px}
 .town-toolbar button,.town-actions button{padding:9px 13px;font-size:11px;border-radius:3px;white-space:nowrap}
 .town-toolbar button[aria-pressed=true]{background:#354b38;color:#f0e8c9}
+.town-loop{padding:9px 13px;font-size:11px;border-radius:3px;white-space:nowrap;background:#354b38;color:#f0e8c9}
 .town-toolbar button:hover,.town-actions button:hover{background:#dfe5d3;color:#293e2d}
 .town-toolbar button:disabled{opacity:.35;cursor:wait}
 .town-coordinates{font-size:9px;letter-spacing:.13em;margin-right:15px;color:#7c866f}
@@ -46,13 +47,17 @@ body[data-page=chengdu]{background:#fff;color:#202820}
 .town-disclaimer{font-size:10px;margin-top:23px;color:#969d8f}
 .town-footer{padding:24px clamp(18px,4vw,64px);display:flex;justify-content:space-between;font-size:10px;color:#919a89}
 /* EXP.002: only the artwork and the bottom CTA link into the game. */
-.city-experiment{margin-top:96px}.city-cover-art{display:grid;place-items:center;padding:30px;background:#f5f5f1}.city-cover{position:relative;display:block;width:min(100%,640px);aspect-ratio:1.6;overflow:hidden;border-radius:3px;background:#698b41;color:#fff5d4;box-shadow:0 16px 35px #30291e18}
-.city-cover img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;transition:transform .65s}.city-cover:hover img,.city-cover:focus-visible img{transform:scale(1.025)}
+/* Reuse the Vietnam cover sizing at every breakpoint; this SVG is a standalone poster. */
+.city-experiment{margin-top:96px}
+.city-cover-art{background:#fff}
+.city-cover{position:relative;aspect-ratio:5/6;overflow:hidden;background:#f3e9ce}
+.city-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.city-cover:focus-visible img{transform:scale(1.025)}
 .city-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(#172e342b,transparent 50%,#172e348a);pointer-events:none}
 .city-cover-label{position:absolute;z-index:1;left:25px;top:25px;font-size:10px;letter-spacing:.14em}
 .city-cover-title{position:absolute;z-index:1;bottom:24px;left:25px;font-size:clamp(32px,4vw,54px);letter-spacing:-.04em}.city-cover-arrow{position:absolute;z-index:1;right:25px;bottom:26px;font-size:27px}
 .city-cover:focus-visible{outline:2px solid #36543d;outline-offset:6px}
-@media(max-width:700px){.town-page{padding-top:20px}.town-heading{display:block;padding-bottom:25px}.town-back{margin-bottom:28px}.town-heading h1 br{display:none}.town-heading h1 em{display:block;margin-top:6px}.town-intro{margin-top:24px}.town-live{margin-bottom:9px}.town-intro p br{display:none}.town-coordinates{display:none}.town-toolbar{padding:8px;gap:5px}.town-toolbar button{padding:9px 8px;font-size:10px}.town-viewport{height:clamp(280px,50vw,420px)}.town-help{flex-direction:column;gap:5px;font-size:9px;padding:12px}.town-info{right:12px;top:12px;width:255px;padding:20px}.town-dpad{left:12px;bottom:14px;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(2,34px)}.town-actions{right:12px;bottom:14px;flex-direction:column;gap:4px}.town-actions button{font-size:10px;padding:8px}.town-story{grid-template-columns:1fr;gap:20px;padding:50px 0}.town-story>.town-eyebrow{grid-column:auto}.town-story>div{font-size:12px}.city-cover-art{padding:24px}.city-cover{width:100%;aspect-ratio:1.5}}
+@media(max-width:700px){.town-page{padding-top:20px}.town-heading{display:block;padding-bottom:25px}.town-back{margin-bottom:28px}.town-heading h1 br{display:none}.town-heading h1 em{display:block;margin-top:6px}.town-intro{margin-top:24px}.town-live{margin-bottom:9px}.town-intro p br{display:none}.town-coordinates{display:none}.town-toolbar{padding:8px;gap:5px}.town-toolbar button{padding:9px 8px;font-size:10px}.town-viewport{height:clamp(280px,50vw,420px)}.town-help{flex-direction:column;gap:5px;font-size:9px;padding:12px}.town-info{right:12px;top:12px;width:255px;padding:20px}.town-dpad{left:12px;bottom:14px;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(2,34px)}.town-actions{right:12px;bottom:14px;flex-direction:column;gap:4px}.town-actions button{font-size:10px;padding:8px}.town-story{grid-template-columns:1fr;gap:20px;padding:50px 0}.town-story>.town-eyebrow{grid-column:auto}.town-story>div{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.city-cover img{transition:none}}
 /* Two rows on narrow screens keep the English window controls reachable too. */
 @media(max-width:700px){.town-toolbar{flex-wrap:wrap}.town-mode{width:100%}.town-settings{width:100%;justify-content:flex-end}}
