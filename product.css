@@ -17,7 +17,7 @@ body[data-page=district] .product-hero { width:100%; max-width:none; padding-inl
 .product-hero-bottom { display:grid; grid-template-columns:1fr 1fr; gap:10%; margin-top:56px; }
 .product-hero-bottom h2 { font-size:clamp(26px,3.2vw,48px); line-height:1.35; letter-spacing:-.04em; }
 .product-hero-bottom p { max-width:48ch; color:var(--color-graphite); font-size:15px; line-height:1.9; }
-.product-stage { position:relative; isolation:isolate; min-height:650px; background:var(--color-paper); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:134px 24px 80px; scroll-margin-top:110px; }
+.product-stage { position:relative; isolation:isolate; min-height:650px; margin-top:clamp(56px,7vw,112px); background:var(--color-paper); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:134px 24px 80px; scroll-margin-top:110px; }
 .stage-caption { position:absolute; left:var(--gutter); right:var(--gutter); top:44px; display:flex; justify-content:space-between; font-size:10px; letter-spacing:.1em; }
 .stage-orbit { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:680px; height:680px; border:1px solid #bfc0b8; border-radius:50%; z-index:-1; }
 .stage-orbit::before,.stage-orbit::after { content:''; position:absolute; inset:60px; border:1px solid #bfc0b8; border-radius:50%; }
