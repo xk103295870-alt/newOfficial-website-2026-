@@ -19,9 +19,10 @@ body[data-page=district] .product-hero { width:100%; max-width:none; padding-inl
 .product-hero-bottom p { max-width:48ch; color:var(--color-graphite); font-size:15px; line-height:1.9; }
 .product-stage { position:relative; isolation:isolate; min-height:650px; background:var(--color-paper); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:134px 24px 80px; scroll-margin-top:110px; }
 .stage-caption { position:absolute; left:var(--gutter); right:var(--gutter); top:44px; display:flex; justify-content:space-between; font-size:10px; letter-spacing:.1em; }
-.stage-orbit { position:absolute; width:680px; height:680px; border:1px solid #bfc0b8; border-radius:50%; z-index:-1; }
+.stage-orbit { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:680px; height:680px; border:1px solid #bfc0b8; border-radius:50%; z-index:-1; }
 .stage-orbit::before,.stage-orbit::after { content:''; position:absolute; inset:60px; border:1px solid #bfc0b8; border-radius:50%; }
 .stage-orbit::after { inset:120px; }
+.stage-composition { display:flex; align-items:center; gap:56px; position:relative; z-index:1; }
 .member-phone { width:286px; background:#fafaf8; border:6px solid #272b28; border-radius:36px; padding:22px 18px; transform:rotate(-5deg); }
 .phone-top { display:flex; justify-content:space-between; font-size:9px; letter-spacing:.08em; }
 .phone-greeting { font-size:25px; letter-spacing:-.04em; line-height:1.25; margin:30px 0 24px; }
@@ -31,7 +32,7 @@ body[data-page=district] .product-hero { width:100%; max-width:none; padding-inl
 .phone-benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:20px; }
 .phone-benefits span { background:#e9eae4; border-radius:4px; padding:14px 8px; font-size:11px; line-height:1.5; }
 .phone-bottom { margin-top:26px; font-size:10px; border-top:1px solid var(--hairline); padding-top:14px; }
-.event-card { position:absolute; top:54%; left:calc(50% + 65px); display:flex; align-items:center; gap:18px; background:white; border:1px solid #d6d6d0; border-radius:8px; padding:22px; transform:rotate(5deg); }
+.event-card { display:flex; align-items:center; gap:18px; background:white; border:1px solid #d6d6d0; border-radius:8px; padding:22px; transform:rotate(5deg); box-shadow:0 18px 40px rgba(30,32,28,.10); }
 .event-check { width:32px; height:32px; display:grid; place-items:center; background:#222921; color:white; border-radius:50%; }
 .event-card strong { font-size:13px; font-weight:400; }
 .event-card p { font-size:10px; color:var(--color-graphite); margin-top:4px; }
@@ -70,6 +71,9 @@ body[data-page=district] .product-hero { width:100%; max-width:none; padding-inl
 .product-contact-links { display:flex; flex-wrap:wrap; gap:32px; margin-top:28px; }
 .product-email { font-size:13px; color:var(--color-graphite); margin:24px 0 64px; }
 .product-footer .footer-title { font-size:clamp(40px,6.8vw,100px); }
+@media(max-width:780px) {
+ .stage-composition { flex-direction:column; gap:30px; }
+}
 @media(max-width:640px) {
  .product-hero { padding-top:16px; padding-bottom:44px; }
  .product-kicker { flex-direction:column; gap:8px; margin-top:28px; font-size:10px; }
@@ -79,7 +83,7 @@ body[data-page=district] .product-hero { width:100%; max-width:none; padding-inl
  .member-phone { width:240px; transform:rotate(-4deg); }
  .phone-greeting { font-size:22px; margin-top:24px; }
  .member-balance strong { font-size:48px; }
- .event-card { left:auto; right:20px; top:auto; bottom:70px; padding:14px; gap:10px; }
+ .event-card { padding:14px; gap:10px; transform:rotate(3deg); }
  .event-points { font-size:25px; }
  .stage-caption { font-size:8px; }
  .stage-foot { font-size:9px; }
