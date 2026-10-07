@@ -1,0 +1,150 @@
+/* 罗马线稿城市 — cool blueprint frame */
+.town-page { min-height:100vh; display:flex; flex-direction:column; }
+.town-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:40px; padding:calc(90px + 2vw) var(--gutter) 40px; max-width:1600px; margin:0 auto; width:100%; }
+.town-back { font-size:12px; color:var(--color-graphite); letter-spacing:.04em; }
+.town-back:hover { color:var(--color-ink); }
+.town-eyebrow { font-size:11px; letter-spacing:.14em; color:var(--color-graphite); margin:22px 0 14px; }
+.town-heading h1 { font:400 clamp(34px,4.6vw,64px)/1.12 var(--font-display); letter-spacing:-.03em; margin:0; }
+.town-heading h1 em { font-style:normal; color:var(--color-graphite); }
+.town-intro { text-align:right; padding-bottom:6px; }
+.town-live { display:inline-flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.14em; color:var(--color-ink); border:1px solid var(--hairline); border-radius:99px; padding:6px 12px; }
+.town-live i { width:6px; height:6px; border-radius:50%; background:var(--color-ink); animation:town-blink 1.6s ease-in-out infinite; }
+@keyframes town-blink { 50% { opacity:.2; } }
+.town-intro p { font-size:13px; color:var(--color-graphite); margin:14px 0 0; line-height:1.8; }
+
+.town-frame { margin:0 var(--gutter) 0; border:1px solid var(--hairline); border-radius:8px; background:var(--color-paper); overflow:hidden; }
+.town-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 16px; border-bottom:1px solid var(--hairline); font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; letter-spacing:.1em; }
+.town-fig { color:var(--color-ink); }
+.town-districts { display:flex; gap:2px; flex-wrap:wrap; justify-content:center; }
+.town-districts button { font:inherit; letter-spacing:inherit; text-transform:uppercase; background:none; border:1px solid transparent; border-radius:3px; padding:5px 10px; color:var(--color-graphite); cursor:pointer; }
+.town-districts button:hover { color:var(--color-ink); border-color:var(--hairline); }
+.town-districts button[aria-selected="true"] { background:var(--color-ink); color:var(--color-paper); }
+.town-settings { display:flex; align-items:center; gap:14px; }
+.town-coordinates { color:var(--color-graphite); }
+#scene-pause { font:inherit; letter-spacing:inherit; text-transform:uppercase; border:1px solid var(--color-ink); background:var(--color-paper); color:var(--color-ink); border-radius:3px; padding:5px 12px; cursor:pointer; }
+#scene-pause:hover { background:var(--color-ink); color:var(--color-paper); }
+#scene-pause[aria-pressed="true"] { background:var(--color-ink); color:var(--color-paper); }
+
+.town-viewport { position:relative; height:clamp(420px,72vh,760px); background:#f1f1f1; }
+#town-game, #town-game canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+#town-game canvas { cursor:grab; }
+#town-game canvas.dragging { cursor:grabbing; }
+.town-message { position:absolute; inset:0; display:grid; place-items:center; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:11px; letter-spacing:.14em; color:var(--color-graphite); background:#f1f1f1; z-index:5; }
+.town-message[hidden] { display:none; }
+.town-message a { text-decoration:underline; }
+
+.vehicle-card { position:absolute; top:16px; right:16px; width:248px; background:var(--color-paper); border:1px solid var(--hairline); border-radius:6px; padding:16px; z-index:6; box-shadow:0 16px 40px rgba(7,7,7,.08); }
+.vc-head { display:flex; justify-content:space-between; align-items:center; }
+.vc-kind { font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:.12em; color:var(--color-graphite); }
+#vc-close { border:none; background:none; font-size:16px; line-height:1; cursor:pointer; color:var(--color-graphite); padding:2px 4px; }
+#vc-close:hover { color:var(--color-ink); }
+.vehicle-card h2 { font:400 26px/1 var(--font-display); letter-spacing:-.02em; margin:10px 0 6px; }
+.vc-task { font-size:11px; color:var(--color-graphite); margin:0 0 12px; }
+.vc-rows { margin:0 0 14px; border-top:1px solid var(--hairline); }
+.vc-rows div { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid var(--hairline); }
+.vc-rows dt { font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:.12em; color:var(--color-graphite); text-transform:uppercase; }
+.vc-rows dd { margin:0; font-size:11px; text-align:right; }
+#vc-follow { width:100%; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; border:1px solid var(--color-ink); background:var(--color-ink); color:var(--color-paper); border-radius:3px; padding:9px 0; cursor:pointer; }
+#vc-follow:hover { background:var(--color-paper); color:var(--color-ink); }
+#vc-follow[aria-pressed="true"] { background:var(--color-paper); color:var(--color-ink); }
+
+.town-help { display:flex; justify-content:space-between; gap:16px; padding:12px 16px; border-top:1px solid var(--hairline); font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; letter-spacing:.1em; color:var(--color-graphite); }
+
+.town-story { display:grid; grid-template-columns:1fr 1fr; gap:40px; padding:calc(60px + 3vw) var(--gutter); max-width:1600px; margin:0 auto; width:100%; }
+.town-story h2 { font:400 clamp(28px,3.4vw,46px)/1.15 var(--font-display); letter-spacing:-.03em; margin:0; }
+.town-story .town-eyebrow { grid-column:1 / -1; margin:0 0 -18px; }
+.town-story p { font-size:14px; line-height:1.9; color:var(--color-graphite); margin:0 0 16px; max-width:56ch; }
+.town-disclaimer { font-size:12px !important; color:var(--color-stone) !important; }
+.town-footer { display:flex; justify-content:space-between; align-items:center; padding:26px var(--gutter); border-top:1px solid var(--hairline); font-size:12px; color:var(--color-graphite); }
+.town-footer a:hover { color:var(--color-ink); }
+
+@media(max-width:900px) {
+  .town-heading { flex-direction:column; align-items:flex-start; gap:24px; padding-top:calc(70px + 2vw); }
+  .town-intro { text-align:left; }
+  .town-districts { order:3; width:100%; }
+  .town-toolbar { flex-wrap:wrap; }
+  .town-story { grid-template-columns:1fr; }
+  .town-coordinates { display:none; }
+}
+@media(max-width:560px) {
+  .vehicle-card { left:12px; right:12px; width:auto; top:auto; bottom:12px; }
+  .town-viewport { height:70vh; }
+}
+
+/* Standalone WebGL viewer. Chrome occupies its own rows, never covers the map. */
+.rome-city-body { height:100dvh; overflow:hidden; display:flex; flex-direction:column; background:#f4f4f4; }
+.rome-city-body .rome-topbar { flex:0 0 52px; position:relative; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:0 18px; border-bottom:1px solid #d6d6d6; background:#f4f4f4; font:10px ui-monospace,'SF Mono',Menlo,Consolas,monospace; letter-spacing:.1em; }
+.rome-back { color:#202020; text-decoration:none; }
+.rome-back:hover { text-decoration:underline; }
+.rome-language { position:relative; }
+.rome-language-button { border:0; background:none; color:#202020; font:inherit; letter-spacing:inherit; cursor:pointer; padding:7px 4px; }
+.rome-language-button span + span { margin-left:7px; }
+.rome-language-menu { position:absolute; top:31px; right:0; min-width:92px; margin:0; padding:5px; list-style:none; background:#f8f8f8; border:1px solid #b8b8b8; box-shadow:0 8px 20px #0001; }
+.rome-language-menu[hidden] { display:none; }
+.rome-language-menu button { width:100%; border:0; background:none; padding:7px 8px; text-align:left; color:#202020; font:inherit; letter-spacing:inherit; cursor:pointer; }
+.rome-language-menu button:hover, .rome-language-menu button[aria-checked="true"] { background:#202020; color:#f1f1f1; }
+.rome-city-body .town-fullscreen { flex:1; min-height:0; }
+.rome-city-body .town-frame { flex:1; min-height:0; margin:0; border:0; border-radius:0; display:flex; flex-direction:column; }
+.rome-city-body .town-toolbar { flex:none; min-height:50px; position:relative; z-index:10; background:#f4f4f4; }
+.rome-city-body .town-viewport { flex:1; height:auto; min-height:0; }
+.rome-city-body .town-districts { flex-wrap:nowrap; overflow-x:auto; min-width:0; justify-content:flex-start; }
+.rome-city-body .town-districts button { flex:none; white-space:nowrap; }
+.rome-city-body #town-game canvas { touch-action:none; }
+.rome-city-body .vehicle-card { top:16px; background:#fafafa; }
+.rome-city-body button:focus-visible,.rome-city-body a:focus-visible { outline:2px solid #333; outline-offset:3px; }
+@media(max-width:900px) {
+ .rome-city-body .town-toolbar { display:grid; grid-template-columns:1fr auto; padding:8px 12px; gap:8px; }
+ .rome-city-body .town-districts { grid-column:1 / -1; grid-row:2; order:0; width:100%; }
+ .rome-city-body .town-districts button { flex:1; }
+ .rome-city-body .town-settings { grid-column:2; grid-row:1; }
+}
+@media(max-width:560px) {
+ .rome-city-body .rome-topbar { padding:0 12px; }
+ .rome-city-body .vehicle-card { top:auto; bottom:12px; max-height:calc(100% - 24px); overflow:auto; }
+}
+.rome-city-body #lang-current { display:inline; color:#333; }
+
+/* Camera actions stay out of the landmark tabs and never cover the top bar. */
+.rome-camera-tools { position:absolute; bottom:18px; left:18px; z-index:4; display:flex; align-items:center; gap:5px; max-width:calc(100% - 36px); padding:5px 7px; background:rgba(250,250,250,.93); border:1px solid #d4d4d4; border-radius:5px; color:#333; font:10px ui-monospace,'SF Mono',Menlo,monospace; }
+.rome-camera-tools button { min-width:32px; min-height:32px; padding:5px 8px; font:inherit; color:inherit; border:0; border-radius:3px; background:transparent; cursor:pointer; white-space:nowrap; }
+.rome-camera-tools button:hover { background:#e7e7e7; }
+.rome-camera-tools button[aria-pressed="true"] { background:#222; color:#fff; }
+.rome-camera-tools #scene-rotate-left,.rome-camera-tools #scene-rotate-right { font-size:20px; line-height:1; }
+.rome-camera-tools output { min-width:34px; text-align:center; font-variant-numeric:tabular-nums; }
+.rome-camera-divider { width:1px; height:17px; background:#d4d4d4; margin:0 3px; }
+.rome-camera-hint { color:#777; padding:0 7px; white-space:nowrap; }
+.rome-city-body #town-game canvas.rotate-mode { cursor:ew-resize; }
+.rome-city-body #town-game canvas.dragging { cursor:grabbing; }
+@media(max-width:760px) { .rome-camera-hint { display:none; } }
+@media(max-width:560px) {
+ .rome-camera-tools { left:10px; bottom:max(10px,env(safe-area-inset-bottom)); max-width:calc(100% - 20px); gap:2px; padding:4px; }
+ .rome-city-body .vehicle-card { bottom:66px; max-height:calc(100% - 90px); }
+}
+
+/* Landmark strip remains a single scrollable row as detailed models are added. */
+.rome-city-body .town-mode,.rome-city-body .town-settings { flex-shrink:0; white-space:nowrap; }
+.rome-city-body .town-districts { scrollbar-width:thin; }
+
+/* The same scene remains mounted while entering/leaving fullscreen. */
+.rome-city-body .town-settings { display:flex; align-items:center; gap:8px; }
+.rome-immersive .rome-city-body .rome-topbar {
+ position:fixed; inset:14px auto auto 14px; height:38px; padding:0 12px;
+ gap:20px; border:1px solid #d4d4d4; border-radius:5px; background:rgba(250,250,250,.94);
+}
+.rome-immersive .rome-city-body .town-toolbar {
+ position:fixed; inset:14px 14px auto auto; z-index:25; min-height:38px;
+ display:flex; padding:4px 6px; border:1px solid #d4d4d4; border-radius:5px;
+ background:rgba(250,250,250,.94);
+}
+.rome-immersive .town-toolbar .town-mode,
+.rome-immersive .town-toolbar .town-districts { display:none; }
+.rome-immersive .town-toolbar .town-settings { display:flex; }
+.rome-immersive .rome-city-body .town-viewport { height:100dvh; }
+@media(max-width:560px) {
+ .rome-immersive .rome-city-body .rome-topbar { left:8px; top:max(8px,env(safe-area-inset-top)); padding:0 7px; gap:8px; letter-spacing:0; }
+ .rome-immersive .rome-city-body .town-toolbar { right:8px; top:max(8px,env(safe-area-inset-top)); }
+ .rome-immersive .rome-city-body .town-settings { gap:4px; }
+}
+@media(max-width:420px) {
+ .rome-immersive .rome-city-body .town-toolbar { top:calc(max(8px,env(safe-area-inset-top)) + 46px); }
+}

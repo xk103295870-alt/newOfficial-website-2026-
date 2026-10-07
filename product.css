@@ -287,3 +287,9 @@ body:is([data-page=ui], [data-page=ui-case]) .product-hero-bottom h2 { white-spa
 .district-map-tooltip-projects button:hover { color:var(--color-ink); }
 .district-map-tooltip-projects button:hover .district-map-tooltip-arrow { transform:translate(2px,-2px); color:var(--color-ink); }
 @media(max-width:700px) { .district-map-layout { grid-template-columns:1fr; gap:24px; } .district-region-list { padding-top:0; } .district-glass-toggle { width:100%; min-width:0; max-width:100%; } .district-glass-toggle-option { min-width:0; min-height:30px; padding:6px 8px; font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .district-region-projects { margin-top:24px; } }
+
+/* AI Lab uses the shared district ocean, without altering its title/copy layout. */
+body[data-page=ai] .ai-lab-hero {
+ width:100%; max-width:none;
+ padding-inline:max(var(--gutter),calc((100vw - 1600px)/2 + var(--gutter)));
+}

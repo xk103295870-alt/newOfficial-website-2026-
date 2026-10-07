@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const read=p=>readFile(new URL('../'+p,import.meta.url),'utf8');
+const [ai,district,css,ocean]=await Promise.all(['ai-lab.html','smart-business-district.html','product.css','hero-ocean.js'].map(read));
+const script=html=>html.match(/<script src="(hero-ocean\.js[^\"]*)" defer><\/script>/)?.[1];
+assert(script(ai));assert.equal(script(ai),script(district),'Use exactly the same effect as the district page');
+assert.match(ai,/<section class="product-hero hero container ai-lab-hero" id="lab">\s*<canvas class="hero-ocean" aria-hidden="true"><\/canvas>/);
+assert.equal((ai.match(/class="hero-ocean"/g)||[]).length,1);
+assert.match(css,/body\[data-page=ai\] \.ai-lab-hero/);
+assert(ai.includes('id="rome-experiment"')&&ai.includes('assets/rome-current-city-cover.jpg'));
+assert(ai.includes('vietnam-sketchbook.html'));
+assert(ocean.includes('prefers-reduced-motion: reduce')&&ocean.includes('IntersectionObserver'));
+console.log('PASS: AI hero reuses district ocean, full-bleed styling, decorative canvas, motion safeguards and experiment covers retained.');

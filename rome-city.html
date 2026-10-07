@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f1f1f1" />
+  <title>罗马线稿城市 — WNTC AI创意实验</title>
+  <meta name="description" content="WNTC Three.js 罗马线稿城市全屏实验。" />
+  <link rel="icon" href="assets/wntc-favicon-aligned.ico" sizes="any" />
+  <link rel="stylesheet" href="styles.css?v=work-card-hover-20260927" />
+  <link rel="stylesheet" href="rome.css?v=fullscreen-20261007" />
+  <script type="module" src="rome-city-page.js?v=fullscreen-20261007"></script>
+</head>
+<body id="top" class="rome-city-body" data-page="rome">
+  <header class="rome-topbar">
+    <a class="rome-back" href="ai-lab.html#rome-experiment" aria-label="返回 AI 创意实验" data-en-label="Back to AI Creative Lab">
+      <span aria-hidden="true">←</span> <span data-en="Back to AI Creative">返回 AI 创意</span>
+    </a>
+    <div class="rome-language">
+      <button id="lang-toggle" class="rome-language-button" type="button" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="选择语言" data-en-label="Choose language">
+        <span id="lang-current">中文</span><span aria-hidden="true">⌄</span>
+      </button>
+      <ul id="lang-menu" class="rome-language-menu" role="menu" aria-label="语言" hidden>
+        <li><button type="button" class="lang-option" data-lang="zh" role="menuitemradio" aria-checked="true">中文</button></li>
+        <li><button type="button" class="lang-option" data-lang="en" role="menuitemradio" aria-checked="false">English</button></li>
+      </ul>
+    </div>
+  </header>
+  <main id="main" class="town-page town-fullscreen">
+    <section class="town-frame" aria-label="罗马线稿城市" data-en-label="Rome line city">
+      <div class="town-toolbar">
+        <div class="town-mode"><span class="town-fig" id="town-clock">FIG 1 · 09:30</span></div>
+        <div class="town-districts" role="tablist" aria-label="城区" data-en-label="Districts">
+          <button type="button" role="tab" aria-selected="true" data-landmark="all" data-en="ALL ROME">全城</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="civic" data-en="CIVIC CENTRE">核心城区</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="forum" data-en="FORUM">大广场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="colosseum" data-en="COLOSSEUM">斗兽场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="circus" data-en="CIRCUS MAXIMUS">大竞技场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="stadium" data-en="DOMITIAN STADIUM">图密善体育场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="pantheon" data-en="PANTHEON">万神殿</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="trevi" data-en="TREVI · 18C">许愿池 · 18世纪</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="marcellus" data-en="MARCELLUS THEATRE">马尔凯鲁斯剧场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="trajan" data-en="TRAJAN FORUM">图拉真广场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="palatine" data-en="PALATINE">帕拉蒂尼宫殿</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="caracalla" data-en="CARACALLA BATHS">卡拉卡拉浴场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="diocletian" data-en="DIOCLETIAN BATHS">戴克里先浴场</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="capitoline" data-en="CAPITOLINE">卡比托利欧神庙</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="claudius" data-en="CLAUDIUS TEMPLE">克劳狄神庙</button>
+          <button type="button" role="tab" aria-selected="false" data-landmark="river" data-en="TIBER">台伯河</button>
+        </div>
+        <div class="town-settings"><button id="scene-fullscreen" type="button" aria-pressed="false">全屏展示</button><button id="scene-pause" aria-pressed="false" data-en="Pause">暂停</button></div>
+      </div>
+      <div class="town-viewport">
+        <div id="town-game" aria-label="罗马线稿城市实时场景" data-en-label="Animated Rome line city scene"></div>
+        <div class="rome-camera-tools" role="group" aria-label="视角控制" data-en-label="View controls">
+          <button type="button" id="scene-rotate-left" aria-label="向左旋转30度" data-en-label="Rotate left 30 degrees">↶</button>
+          <output id="scene-bearing" aria-label="旋转角度" data-en-label="Rotation angle">0°</output>
+          <button type="button" id="scene-rotate-right" aria-label="向右旋转30度" data-en-label="Rotate right 30 degrees">↷</button>
+          <span class="rome-camera-divider" aria-hidden="true"></span>
+          <button type="button" id="scene-rotate-mode" aria-pressed="false" data-en="Rotate drag">拖动旋转</button>
+          <button type="button" id="scene-view-reset" data-en="Reset view">复位视角</button>
+          <span class="rome-camera-hint" data-en="Shift + drag · Q / E">Shift + 拖动 · Q / E</span>
+        </div>
+        <div id="town-loading" class="town-message" role="status" data-en="Drawing the city…">正在绘制城市…</div>
+        <div id="town-error" class="town-message" role="alert" hidden><p data-en="The city could not load. Please reload to try again.">城市暂时未能加载，请刷新重试。</p><a href="rome-city.html" data-en="Reload ↗">重新加载 ↗</a></div>
+        <aside id="vehicle-card" class="vehicle-card" hidden aria-live="polite">
+          <div class="vc-head"><span id="vc-kind" class="vc-kind">马车 · CART</span><button id="vc-close" type="button" aria-label="关闭" data-en-label="Close">×</button></div>
+          <h2 id="vc-id">RO-07</h2>
+          <p id="vc-task" class="vc-task">沿 神圣大道 行驶</p>
+          <dl class="vc-rows">
+            <div><dt data-en="Route">线路</dt><dd id="vc-route">神圣大道 · SACRED WAY</dd></div>
+            <div><dt data-en="Next stop">下一站</dt><dd id="vc-next">大广场</dd></div>
+            <div><dt data-en="Sector">街区</dt><dd id="vc-sector">IV-4</dd></div>
+            <div><dt data-en="Speed">车速</dt><dd id="vc-speed">12 km/h</dd></div>
+          </dl>
+          <button id="vc-follow" type="button" aria-pressed="false" data-en="FOLLOW">跟随</button>
+        </aside>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
